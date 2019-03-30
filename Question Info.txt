@@ -1,0 +1,21 @@
+1. How important is cleanliness?	id: clean1-5
+	1:not important		5: very important
+2. Do you allow pet(s)? 		id: petY, petN
+	Y / N
+3. How quiet do you like to be?		id: quite1-5
+	1:very loud		5: very quite
+4. How often do you bring friends over?	id: friends1-5
+	1:not at all		5: always
+5. What time do you go to bed?		id: sleep1-5
+	1: before 10
+	2: 10-11
+	3: 11-12
+	4: 12-2
+	5: after 2
+6. Cooking habits (anything smell)	id: cook1-5
+	1: all the times	5: no smelling food cook
+7. Do you plan ... weekends?		id: plan1-5
+	1: never		5: every weekend
+8. Do you smoke?			id: smokeY, smokeN
+9. Do you have any allergies?		id: allergiesY, allergiesN
+	Y / N
