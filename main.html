@@ -10,6 +10,17 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        #page td {
+            padding: 0;
+            margin: 0;
+        }
+
+        #page {
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 
 <body class="bg-secondary">
@@ -28,15 +39,23 @@
 </body>
 <header>
     <div class="float-left">
-        <button type="button" name="" id="" class="btn btn-dark" btn-lg btn-block">Create post</button>
+        <script type="text/javascript">
+            function newPopup(url) {
+                popupWindow = window.open(
+                    url, 'popUpWindow', 'height=350,width=400,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+            }
+        </script>
+        <p><a class="btn btn-dark btn-primary" href="JavaScript:newPopup('post.html');" role="button">Create Post</a>
+        </p>
     </div>
     <div class="float-right">
+            <a class="btn btn-dark btn-primary" href="login.html" role="button">Sign in / Go to Profile</a>
+        <!--
         <button type="button" name="" id="" class="btn btn-dark" btn-lg btn-block">Sign in / Go to Profile</button>
+        -->
     </div>
     <div class="text-secondary float-right">please ignore this</div>
-    <div class="float-right">
-        <button type="button" name="" id="" class="btn btn-dark" btn-lg btn-block">Messages</button>
-    </div>
+    
     <div class="text-center">
         <img src="Logo_tamp.png" class="rounded" width="300">
     </div>
@@ -52,34 +71,151 @@
     <div class="container-fluid">
         <div class="row">
             <div class="container float-left bg-info">
-                <div class="row">
-                    <h4 class="title text-white col-sm col-md col-lg">Filter Posts: </h4>
-                    <form action="main.html">
-                        <div class="form-group dropdown col-sm col-md col-lg">
-                            <button class="btn btn-dark dropdown-toggle" type="button" id="cleanliness"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Select Cleanliness
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Very important</a>
-                                <a class="dropdown-item" href="#">Important</a>
-                                <a class="dropdown-item" href="#">Normal</a>
-                                <a class="dropdown-item" href="#">Not very important</a>
-                                <a class="dropdown-item" href="#">I don't care</a>
-                            </div>
-                        </div>
-                        <div class="form-group dropdown col-sm col-md col-lg">
-                            <button class="btn btn-dark dropdown-toggle" type="button" id="pets" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                Pet preference
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Yes</a>
-                                <a class="dropdown-item" href="#">No</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                <form action="main.html">
+                    <div>
+                        <table class="page">
+                            <thead>
+                                <tr>
+                                    <th colspan="3">
+                                        <h4 class="title text-white col-sm col-md col-lg">Filter Posts: </h4>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row">
+                                        <div class="form-group dropdown col-sm col-md col-lg">
+                                            <button class="btn btn-dark dropdown-toggle" type="button" id="cleanliness"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Select Cleanliness
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Very important</a>
+                                                <a class="dropdown-item" href="#">Important</a>
+                                                <a class="dropdown-item" href="#">Normal</a>
+                                                <a class="dropdown-item" href="#">Not very important</a>
+                                                <a class="dropdown-item" href="#">I don't care</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group dropdown col-sm col-md col-lg">
+                                            <button class="btn btn-dark dropdown-toggle" type="button" id="pets"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Pet preference
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Yes</a>
+                                                <a class="dropdown-item" href="#">No</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group dropdown col-sm col-md col-lg">
+                                            <button class="btn btn-dark dropdown-toggle" type="button" id="quiet"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Select Quiet 
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Very quiet</a>
+                                                <a class="dropdown-item" href="#">little quiet</a>
+                                                <a class="dropdown-item" href="#">Normal</a>
+                                                <a class="dropdown-item" href="#">little loud</a>
+                                                <a class="dropdown-item" href="#">Very loud</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group dropdown col-sm col-md col-lg">
+                                            <button class="btn btn-dark dropdown-toggle" type="button" id="friends"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Select friends
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Never</a>
+                                                <a class="dropdown-item" href="#">Rarely</a>
+                                                <a class="dropdown-item" href="#">Sometimes</a>
+                                                <a class="dropdown-item" href="#">Pretty often</a>
+                                                <a class="dropdown-item" href="#">Always</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group dropdown col-sm col-md col-lg">
+                                            <button class="btn btn-dark dropdown-toggle" type="button" id="sleep"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Select Sleep Schedule
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Before 10</a>
+                                                <a class="dropdown-item" href="#">10 - 11</a>
+                                                <a class="dropdown-item" href="#">11 - 12</a>
+                                                <a class="dropdown-item" href="#">12 - 2</a>
+                                                <a class="dropdown-item" href="#">After 2</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">
+                                        <div class="form-group dropdown col-sm col-md col-lg">
+                                            <button class="btn btn-dark dropdown-toggle" type="button" id="cook"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Select Cook habit
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Never</a>
+                                                <a class="dropdown-item" href="#">Rarely</a>
+                                                <a class="dropdown-item" href="#">Sometimes</a>
+                                                <a class="dropdown-item" href="#">Pretty often</a>
+                                                <a class="dropdown-item" href="#">Always</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group dropdown col-sm col-md col-lg">
+                                            <button class="btn btn-dark dropdown-toggle" type="button" id="cleanliness"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Select 
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Never</a>
+                                                <a class="dropdown-item" href="#">Rarely</a>
+                                                <a class="dropdown-item" href="#">Sometimes</a>
+                                                <a class="dropdown-item" href="#">Pretty often</a>
+                                                <a class="dropdown-item" href="#">Always</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group dropdown col-sm col-md col-lg">
+                                            <button class="btn btn-dark dropdown-toggle" type="button" id="smoke"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Select Smoking preference
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Yes</a>
+                                                <a class="dropdown-item" href="#">No</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group dropdown col-sm col-md col-lg">
+                                            <button class="btn btn-dark dropdown-toggle" type="button" id="allergies"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Select Allergies preference
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Yes</a>
+                                                <a class="dropdown-item" href="#">No</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
             </div>
             <article class="post float-right container bg-dark">
                 <h3 class="title text-white"> This is a sample post: </h3>
