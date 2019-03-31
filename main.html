@@ -28,10 +28,20 @@
 </body>
 <header>
     <div class="float-left">
-        <button type="button" name="" id="" class="btn btn-dark" btn-lg btn-block">Create post</button>
+        <script type="text/javascript">
+            function newPopup(url) {
+                popupWindow = window.open(
+                    url, 'popUpWindow', 'height=350,width=400,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+            }
+        </script>
+        <p><a class="btn btn-dark btn-primary" href="JavaScript:newPopup('post.html');" role="button">Create Post</a>
+        </p>
     </div>
     <div class="float-right">
+        <a class="btn btn-dark btn-primary" href="Profile.html" role="button">Sign in / Go to Profile</a>
+        <!--
         <button type="button" name="" id="" class="btn btn-dark" btn-lg btn-block">Sign in / Go to Profile</button>
+        -->
     </div>
     <div class="text-secondary float-right">please ignore this</div>
     <div class="float-right">
@@ -53,7 +63,7 @@
         <div class="row">
             <div class="container float-left bg-info">
                 <h4 class="title text-white">Filter Posts</h4>
-                
+
             </div>
             <article class="post float-right container bg-dark">
                 <h3 class="title text-white"> This is a sample post: </h3>
