@@ -38,7 +38,7 @@
 
 </head>
 
-<body class="bg-secondary">
+<body class="bg-light mb-5">
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -52,35 +52,34 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 
-    <div class="text-center">
-        <img src="Logo_tamp.png" class="rounded" width="300" alt="...">
-        <h1 class="text-body">Profile</h1>
+    <div class="text-center mt-5 mb-5">
+        <img src="Logo_tamp.png" class="rounded" width="500" alt="...">
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-left: 200px;">
         <div class="row">
             <!-- Profile picture in this container. -->
             <div class="container float-left">
-                <h5 class="text-body col">Profile Picture</h6>
-                    <img src="rare parrot.gif" class="rounded" width="300" alt="...">
+                <h5 class="font-weight-normal text-body col mt-3">Profile Picture</h6>
+                    <button>Browse...</button> 
             </div>
             <!-- Everything else in this container? -->
             <div class="container float-right">
                 <form>
                     <div class="form-group">
                         <label for="fullName" class="float-left col">
-                            <h5 class="text-body">Full Name*</h5>
+                            <h5 class="text-body font-weight-normal mt-5">Full Name*</h5>
                         </label>
-                        <input class="form-control float-right" id="fullName" placeholder="Enter Full Name">
+                        <input style="max-width: 500px;" class="form-control" id="fullName" placeholder="Anna Tran">
                     </div>
                     <div class="form-group">
                         <label for="major" class="float-left col">
-                            <h5 class="text-body">Major</h5>
+                            <h5 class="text-body font-weight-normal mt-3">Major</h5>
                         </label>
-                        <input class="form-control float-right" id="major" placeholder="Enter Major">
+                        <input style="max-width: 500px;" class="form-control" id="major" placeholder="Computer Science">
                     </div>
                     <div class="form-group dropdown">
                         <label for="age" class="float-left col">
-                            <h5 class="text-body">Age</h5>
+                            <h5 class="text-body font-weight-normal mt-3">Age</h5>
                         </label>
                         <button class="btn btn-dark dropdown-toggle" type="button" id="age" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
@@ -93,7 +92,7 @@
                         </div>
                     </div><br>
                     <label for="gender" class="col">
-                        <h5 class="text-body">Gender*</h5>
+                        <h5 class="text-body font-weight-normal mt-3">Gender*</h5>
                     </label>
                     <div id="gender">
                         <div class="form-check">
@@ -118,7 +117,7 @@
                     </div><br>
                     <div class="form-group dropdown">
                         <label for="race" class="float-left col">
-                            <h5 class="text-body">Race</h5>
+                            <h5 class="text-body font-weight-normal mt-3">Race</h5>
                         </label>
                         <button class="btn btn-dark dropdown-toggle" type="button" id="race" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
@@ -131,19 +130,19 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="description"><h5 class="text-body">Describe yourself:</h5></label>
-                        <textarea class="form-control" rows="5" id="description"></textarea>
+                        <label for="description"><h5 class="text-body font-weight-normal mt-5">Describe yourself:</h5></label>
+                        <textarea style="max-width: 800px;" class="form-control" rows="5" id="description"></textarea>
                     </div>
                     <div class="form-group">
                         <div>
-                            <h5 class="text-body">Link accounts:</h4>
+                            <h5 class="text-body font-weight-normal mt-5">Link accounts:</h4>
                         </div>
                         <a href="#" class="fa fa-facebook"></a>
                         <a href="#" class="fa fa-twitter"></a>
                     </div>
                     <div class="text-center">
-                        <a class="btn btn-dark btn-primary" href="main.html" role="button">Cancel</a>
-                        <a class="btn btn-dark btn-primary" href="question.html" role="button">Continue</a>
+                        <a class="btn btn-dark btn-primary mr-3" href="main.html" role="button">Cancel</a>
+                        <a class="btn btn-dark btn-primary ml-3" href="question.html" role="button">Continue</a>
                         <!--
                     <button type="button" class="btn btn-dark instructor_login">Cancel</button>
                     <button type="button" class="btn btn-dark instructor_login">Continue</button>
