@@ -30,16 +30,31 @@
     </h4>
     <div class="text-center">
           <h4 class="font-weight-normal text-body mt-5">Title</h4>
-          <input class="form-control" style="max-width: 500px; margin: 0 auto;" id="fullName" placeholder="Exp: Looking for a female roommate for Summer 2019">
+          <input id="titleText" class="form-control" style="max-width: 500px; margin: 0 auto;" placeholder="Exp: Looking for a female roommate for Summer 2019">
           <h4 class="font-weight-normal text-body mt-3">Description<h4>
-          <input class="form-control" style="max-width: 500px; margin: 0 auto;" id="major" placeholder="Exp: Location/price/utilities/...">
+          <input id="contentText" class="form-control" style="max-width: 500px; margin: 0 auto;" placeholder="Exp: Location/price/utilities/...">
 
         </div>
     <div class="text-center">
         
         <button type="button" name="" id="" onclick="window.open('', '_self', ''); window.close();" class="btn btn-dark btn-primary mt-5 mr-3" btn-lg btn-block">Cancel</button>
-        <button type="button" name="" id="" class="btn btn-dark btn-primary mt-5 ml-3" btn-lg btn-block">Post</button>
+        <button type="button" name="" id="" onclick="post(); window.close();" class="btn btn-dark btn-primary mt-5 ml-3" btn-lg btn-block">Post</button>
+		<script>
+			function post()
+			{
+				var data = [document.getElementById("titleText").value, document.getElementById("contentText").value]
+				window.opener.postMessage(data, '*');
+			}
+        </script>
     </div>
 </body>
 
+<!--script>
+	//This function is to publish a post
+	var otherWindow;
+	function publish_post()
+	{
+		otherWindow.postMessage("showContent_recent", "*");
+	}
+</script-->
 </html>

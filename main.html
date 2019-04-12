@@ -44,7 +44,17 @@
                     url, 'popUpWindow', 'height=350,width=400,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
             }
         </script>
-        <p><a class="btn btn-dark btn-primary" href="JavaScript:newPopup('post.html');" role="button">Create Post</a>
+        <p>
+			<a class="btn btn-dark btn-primary" href="" onclick="openCreatePost()" role="button">Create Post</a>
+			<script>
+				function openCreatePost() {
+					newPopup("post.html");
+				}
+				
+				window.addEventListener("message", function(event) {
+					showContent_recent(event.data[0], "e",event.data[1]);
+				});
+			</script>
         </p>
     </div>
     <div class="float-right">
@@ -59,8 +69,64 @@
     </div>
     <div class="container">
         <form method="get" action="main.html" class="text-center">
-            <input type="text" placeholder="Search for a post..." class="search-input" name="search" />
-            <a name="" id="" class="btn btn-dark" href="#" role="button">Go!</a>
+			<script>
+				// This is the function to search for posts
+				function search_post(val)
+				{
+					val = val.toLowerCase();
+					var outer = document.getElementsByClassName("recent_post")[0];
+					var children = outer.children;
+					
+					for (i = 0; i < children.length; i++) {
+						if (children[i].innerText.toLowerCase().includes(val))
+						{
+							children[i].style.display = "";
+							//highlight in title
+							var innerText = children[i].children[0].children[0].innerText;
+							var index = innerText.indexOf(val);
+							if (index >= 0)
+							{
+								innerText = innerText.substring(0,index) + "<span style=\"background-color: SkyBlue\">" + innerText.substring(index,index+val.length) + "</span>" + innerText.substring(index + val.length);
+							}
+							else
+							{
+								innerText = "<span style=\"background-color: azure\">" + innerText.substring(0,index) + innerText.substring(index,index+val.length) + innerText.substring(index + val.length) + "</span>";
+							}
+							children[i].children[0].children[0].innerHTML = innerText;
+							//highlight in author name
+							innerText = children[i].children[0].children[1].innerText;
+							index = innerText.indexOf(val);
+							if (index >= 0)
+							{
+								innerText = innerText.substring(0,index) + "<span style=\"background-color: SkyBlue\">" + innerText.substring(index,index+val.length) + "</span>" + innerText.substring(index + val.length);
+							}
+							else
+							{
+								innerText = "<span style=\"background-color: azure\">" + innerText.substring(0,index) + innerText.substring(index,index+val.length) + innerText.substring(index + val.length) + "</span>";
+							}
+							children[i].children[0].children[1].innerHTML = innerText;
+							//highlight in post body
+							innerText = children[i].children[0].children[2].innerText;
+							index = innerText.indexOf(val);
+							if (index >= 0)
+							{
+								innerText = innerText.substring(0,index) + "<span style=\"background-color: SkyBlue\">" + innerText.substring(index,index+val.length) + "</span>" + innerText.substring(index + val.length);
+							}
+							else
+							{
+								innerText = "<span style=\"background-color: azure\">" + innerText.substring(0,index) + innerText.substring(index,index+val.length) + innerText.substring(index + val.length) + "</span>";
+							}
+							children[i].children[0].children[2].innerHTML = innerText;
+						}
+						else 
+						{
+							children[i].style.display = "none";
+						}
+					}
+				}
+			</script>
+            <input type="text" placeholder="Search for a post..." class="search-input" name="search" onkeyup="search_post(this.value)">
+           
         </form>
     </div>
 </header>
@@ -129,10 +195,12 @@
 			
 			<!-- RECENT POSTS -->
 			<template id="recent_template">
-				<span class="post container border border-primary rounded" style="padding: 5px; background-color: azure; border-width:3px !important; border-style: dashed !important; width:47%; float: left; margin: 10px;">
-					<h6 class="title text-dark text-center" > Female roommate needed</h6>
-					<h6 class="text-dark text-center">Ryan Tran</h6>
-					<p class="story text-dark"> This is where the description of the post would go. </p>
+				<span class="post container border border-primary rounded" style="padding: 5px; background-color: azure; border-width:3px !important; border-style: dashed !important; width:30%; float: left; margin: 10px;">
+					<div class="post_content">
+						<h6 class="title text-dark text-center" > Female roommate needed</h6>
+						<h6 class="author text-dark text-center">Ryan Tran</h6>
+						<p class="story text-dark">This is where the description of the post would go. </p>
+					</div>
 					<!--div class="timestamp text-dark"> Posted at 7:41pm August 24, 2018 </div-->
 					<a name="" id="" class="btn" href="#" role="button" style="background-color: darkkhaki;" onclick="save()">Save</a>
 					<a name="" id="" class="btn float-right" href="JavaScript:newPopup('contact.html');" role="button" style="background-color: wheat;">Contact</a>
@@ -140,52 +208,26 @@
 			</template>
 			
 			<script>
-			function showContent_recent() {
+			function showContent_recent(title, author, content) {
 			  var temp = document.getElementById("recent_template");
-			  var clon = temp.content.cloneNode(true);
-			  document.body.getElementsByClassName("recent_post")[0].appendChild(clon);
+			  var clone = document.importNode(temp.content, true);
+			  clone.querySelector(".title").textContent = title;
+			  clone.querySelector(".author").textContent = author;
+			  clone.querySelector(".story").textContent = content;
+			  document.body.getElementsByClassName("recent_post")[0].insertBefore(clone, document.body.getElementsByClassName("recent_post")[0].firstChild);
 			}
 			</script>
 			
-			<div class="recent_post" style="margin-left: 20%; width: 50%;">
+			<div class="recent_post" style="margin-left: 20%; width: 80%;">
 			</div>
 			<script>
-				showContent_recent();
-				showContent_recent();
-				showContent_recent();
-				showContent_recent();
+				//sample posts
+				showContent_recent("t1","a","bdsf");
+				showContent_recent("t2","b","asdfa");
+				showContent_recent("t3","c","asdf");
+				showContent_recent("t4","d","adf");
 			</script>
 			
-			<!-- RECOMMENDED POSTS -->
-			<template id="recom_template">
-				<span class="post container border rounded" style="padding: 5px; background-color: beige; border-color: darkseagreen !important; border-width:3px !important; border-style: dotted !important; width:95%; float: left; margin: 10px;">
-					<h6 class="title text-dark text-center" > Female roommate needed</h6>
-					<h6 class="text-dark text-center">Ryan Tran</h6>
-					<p class="story text-dark"> This is where the description of the post would go. </p>
-					<!--div class="timestamp text-dark"> Posted at 7:41pm August 24, 2018 </div-->
-					<a name="" id="" class="btn" href="#" role="button" style="background-color: darkkhaki;" onclick="save()">Save</a>
-					<a name="" id="" class="btn float-right" href="JavaScript:newPopup('contact.html');" role="button" style="background-color: wheat;">Contact</a>
-				</span>
-			</template>
-			
-			<script>
-			
-			function showContent_recom() {
-			  var temp = document.getElementById("recom_template");
-			  var clon = temp.content.cloneNode(true);
-			  clon.id = "";
-			  document.body.getElementsByClassName("recom_post")[0].appendChild(clon);
-			}
-			</script>
-			
-			<div class="recom_post" style="right-margin: 5%; width: 25%;">
-			</div>
-			<script>
-				showContent_recom();
-				showContent_recom();
-				showContent_recom();
-				showContent_recom();
-			</script>
 			
         </div>
     </div>
