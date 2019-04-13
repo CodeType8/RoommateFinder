@@ -38,18 +38,12 @@
 </body>
 <header>
     <div class="float-left">
-        <script type="text/javascript">
-            function newPopup(url) {
-                popupWindow = window.open(
-                    url, 'popUpWindow', 'height=350,width=400,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
-            }
-        </script>
         <p>
-			<a class="btn btn-dark btn-primary" href="" onclick="openCreatePost()" role="button">Create Post</a>
+			<button type="button" onclick="openCreatePost()" style="margin-left:50px;" class="btn btn-dark btn-primary" >Create Post</button>
 			<script>
 				function openCreatePost() {
-					newPopup("post.html");
-				}
+					var postWindow = window.open("post.html","", "toolbar=yes,scrollbars=yes,resizable=yes,top=50,left=350,width=600,height=500");
+					}
 				
 				window.addEventListener("message", function(event) {
 					showContent_recent(event.data[0], "e",event.data[1]);
@@ -126,6 +120,7 @@
 				}
 			</script>
             <input type="text" placeholder="Search for a post..." class="search-input" name="search" onkeyup="search_post(this.value)">
+			<p id="filter_noti" style="margin:15px auto;"></p>
            
         </form>
     </div>
@@ -136,14 +131,15 @@
             <div class="sidebar">
                 <button class="collapsible">Filter</button>
                     <div class="content">
+					<input type="checkbox" name="filter_rec_post" value="no" onchange="handle_rec_post(this)">Show recommended posts<br>
                     <div>
                         <button class="collapsible">Cleanliness</button>
                         <div class="innercontent">
                             <a>Select level of cleanliness: </a>
-                            <select>
-                            <option>Very important</option>
-                            <option>Preferable</option>
-                            <option>Doesn't matter</option>           
+                            <select onchange="filter();">
+								<option value="3">Very important</option>
+								<option value="2">Preferable</option>
+								<option value="1">Doesn't matter</option>           
                             </select>
                         </div>
                     </div>
@@ -152,11 +148,11 @@
                         <button class="collapsible">Quietness</button>
                         <div class="innercontent">
                             <a>Select importance of quietness: </a>
-                            <select>
-                            <option>Above average</option>
-                            <option>Average</option>
-                            <option>Below average</option>
-                            <option>Doesn't matter</option>            
+                            <select onchange="filter();">
+								<option value="4">Above average</option>
+								<option value="3">Average</option>
+								<option value="2">Below average</option>
+								<option value="1">Doesn't matter</option>            
                             </select>
                         </div>
                     </div>
@@ -165,10 +161,10 @@
                         <button class="collapsible">Pet friendliness</button>
                         <div class="innercontent">
                             <a>Select preference: </a>
-                            <select>
-                            <option>Pet Friendly</option>
-                            <option>No pets</option>
-                            <option>Doesn't matter</option>            
+                            <select onchange="filter();">
+								<option value="3">Pet Friendly</option>
+								<option value="2">No pets</option>
+								<option value="1">Doesn't matter</option>            
                             </select>
                         </div>
                     </div>
@@ -177,17 +173,103 @@
                         <button class="collapsible">Smoking preference</button>
                         <div class="innercontent">
                             <a>Select preference: </a>
-                            <select>
-                            <option>Smoking is okay</option>
-                            <option>No smoking</option>
-                            <option>Doesn't matter</option>            
+                            <select onchange="filter();">
+								<option value="2"Smoking is okay</option>
+								<option value="3">No smoking</option>
+								<option value="1">Doesn't matter</option>            
                             </select>
                         </div>
                     </div>
+					<a class="btn btn-dark btn-primary mt-5 ml-3" href="" onclick="clear_filter()" role="button">Clear filter</a>
+					
                     </div> 
                 </div>
 			
 			<script>
+			//assume this user's reference is 1,2,1,1
+			function handle_rec_post(me)
+			{
+				//get currently displayed posts
+				var outer = document.getElementsByClassName("recent_post")[0];
+				var children = outer.children;
+				var displaying = []
+				for (i = 0; i < children.length; i++) {
+					if (children[i].style.display == "")
+					{
+						displaying.push(i);
+					}
+				}
+				
+				var count = 0;
+				if (me.checked == true)
+				{
+					displaying.forEach(function(i)
+					{
+						if (children[i].classList.contains("clean" + 1) &&
+						children[i].classList.contains("quiet" + 2) &&
+						children[i].classList.contains("pet" + 1) &&
+						children[i].classList.contains("smoke" + 1))
+						{
+							count += 1;
+							children[i].style.display = "";
+						}
+						else
+						{
+							children[i].style.display = "none";
+						}
+					})
+					document.getElementById("filter_noti").innerHTML = count + " results found from your personal preference and filter criterias.";
+				}
+				else
+				{
+					displaying.forEach(function(i)
+					{
+						children[i].style.display = "";
+						count += 1;
+					})
+					document.getElementById("filter_noti").innerHTML = count + " results found from your filter criterias.";
+				}
+			}
+			
+			function clear_filter()
+			{
+				document.getElementById("filter_noti").innerHTML = "";
+				var outer = document.getElementsByClassName("recent_post")[0];
+				outer.children.style.display = "";
+			}
+			
+			function filter()
+			{
+				var a = document.getElementsByTagName("select");
+				var current_values = []
+				for (i=0; i< a.length; i++)
+				{
+					current_values.push(a[i].value);
+					console.log(a[i].value);
+				}
+				
+				var count = 0;
+				var outer = document.getElementsByClassName("recent_post")[0];
+				var children = outer.children;
+					
+				for (i = 0; i < children.length; i++) {
+					if (children[i].classList.contains("clean" + current_values[0]) &&
+					children[i].classList.contains("quiet" + current_values[1]) &&
+					children[i].classList.contains("pet" + current_values[2]) &&
+					children[i].classList.contains("smoke" + current_values[3]))
+					{
+						count += 1;
+						children[i].style.display = "";
+					}
+					else
+					{
+						children[i].style.display = "none";
+					}
+				}
+				
+				document.getElementById("filter_noti").innerHTML = count + " results found from your filter criterias.";
+			}
+			
 			function save() {
 				alert("saved");
 			}
@@ -195,7 +277,7 @@
 			
 			<!-- RECENT POSTS -->
 			<template id="recent_template">
-				<span class="post container border border-primary rounded" style="padding: 5px; background-color: azure; border-width:3px !important; border-style: dashed !important; width:30%; float: left; margin: 10px;">
+				<span class="post container border border-primary rounded" style="padding: 5px; background-color: Cornsilk; border-width:3px !important; border-style: dashed !important; width:30%; float: left; margin: 10px;">
 					<div class="post_content">
 						<h6 class="title text-dark text-center" > Female roommate needed</h6>
 						<h6 class="author text-dark text-center">Ryan Tran</h6>
@@ -203,17 +285,41 @@
 					</div>
 					<!--div class="timestamp text-dark"> Posted at 7:41pm August 24, 2018 </div-->
 					<a name="" id="" class="btn" href="#" role="button" style="background-color: darkkhaki;" onclick="save()">Save</a>
-					<a name="" id="" class="btn float-right" href="JavaScript:newPopup('contact.html');" role="button" style="background-color: wheat;">Contact</a>
+					<button name="" id="" class="btn float-right" onclick="contact()" type="button" style="background-color: BurlyWood;">Contact</button>
+					<script>
+						function contact() {
+							var contactWindow = window.open("contact.html","", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=350,width=600,height=400");
+						}
+					</script>
 				</span>
 			</template>
 			
+			<style>
+				@keyframes glow {
+					0%   {background-color: SpringGreen;}
+					30%  {background-color: MistyRose;}
+				    50%  {background-color: SandyBrown;}
+					100% {background-color: Cornsilk;}
+					}
+			</style>
+			
 			<script>
-			function showContent_recent(title, author, content) {
+			//clean 1=doesnot matter, 2=preferable, 3=very important
+			//quiet 1=doesnot matter, 2=below average, 3=average, 4=above average
+			//pet 1=doesnot matter, 2= not pets, 3=pet friendly
+			//smoke 1=doesnot matter, 2=smoking is ok, 3=no smoke
+			function showContent_recent(title, author, content, clean, quiet, pet, smoke) {
 			  var temp = document.getElementById("recent_template");
 			  var clone = document.importNode(temp.content, true);
 			  clone.querySelector(".title").textContent = title;
 			  clone.querySelector(".author").textContent = author;
 			  clone.querySelector(".story").textContent = content;
+			  clone.firstElementChild.classList.add("clean"+clean);
+			  clone.firstElementChild.classList.add("quiet"+quiet);
+			  clone.firstElementChild.classList.add("pet"+pet);
+			  clone.firstElementChild.classList.add("smoke"+smoke);
+			  //add animation
+			  clone.firstElementChild.style.animation = "glow 4s";
 			  document.body.getElementsByClassName("recent_post")[0].insertBefore(clone, document.body.getElementsByClassName("recent_post")[0].firstChild);
 			}
 			</script>
@@ -221,11 +327,11 @@
 			<div class="recent_post" style="margin-left: 20%; width: 80%;">
 			</div>
 			<script>
-				//sample posts
-				showContent_recent("t1","a","bdsf");
-				showContent_recent("t2","b","asdfa");
-				showContent_recent("t3","c","asdf");
-				showContent_recent("t4","d","adf");
+				//sample posts -clean, quiet, pet, smoke <= look at 10 lines above
+				showContent_recent("t1","author1","fill in content", 1, 2,1,1);
+				showContent_recent("t2","b","asdfa", 2, 2,1,1);
+				showContent_recent("t3","c","asdf", 1, 2,1,1);
+				showContent_recent("t4","d","adf", 2, 3,1,1);
 			</script>
 			
 			

@@ -10,6 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <body class="bg-light" style="margin-top: 5%">
@@ -24,8 +25,9 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <h4 class="text-center">
+        crossorigin="anonymous">
+	</script>
+    <h4 id="receiver" class="text-center">
         Send a message to ...
     </h4>
     <div class="text-center">
@@ -36,8 +38,15 @@
     <div class="text-center">
         
         <button type="button" name="" id="" onclick="window.open('', '_self', ''); window.close();" class="btn btn-dark btn-primary mt-5 mr-3" btn-lg btn-block">Cancel</button>
-        <button type="button" name="" id="" class="btn btn-dark btn-primary mt-5 ml-3" btn-lg btn-block">Send</button>
+        <button type="button" name="" id="" onclick="noti();window.close();" class="btn btn-dark btn-primary mt-5 ml-3" btn-lg btn-block">Send</button>
     </div>
+	
+	<script>
+		function noti()
+		{
+			alert("Your message has been sent.");
+		}
+	</script>
 </body>
 
 </html>
