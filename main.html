@@ -159,8 +159,6 @@
 	<section class="posts">
 		<div class="container-fluid">
 			<div class="row">
-
-
 				<script>
 					//assume this user's reference is 1,2,1,1
 					function handle_rec_post(me) {
@@ -449,8 +447,7 @@
 	var output = document.getElementById("demo");
 	output.innerHTML = slider.value; // Display the default slider value
 	output.style.left = "100px";
-
-	// Update the current slider value (each time you drag the slider handle)
+	//Update the current slider value (each time you drag the slider handle)
 	slider.oninput = function () {
 		output.innerHTML = this.value;
 	} 
