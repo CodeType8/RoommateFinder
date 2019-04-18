@@ -74,7 +74,8 @@
 	<div class="text-left" style="margin-left:15%; margin-right:15%;">
 		<div class="border border-success"
 			style="border-bottom-width: 1px;margin-bottom: 0px;padding-bottom: 100px;padding-left: 25px;padding-right: 0px;">
-			<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 40%;">1. How important is cleanliness?
+			<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 40%;">1. How important is
+				cleanliness?
 			</h5>
 			<div class="slidecontainer mt-3" style="float: left; width: 60%;clear: right;">
 				<input type="range" min="1" max="5" value="3" class="slider" id="r1">
@@ -83,10 +84,26 @@
 			<script>
 				var slider1 = document.getElementById("r1");
 				var output1 = document.getElementById("v1");
-				output1.innerHTML = slider1.value;
+				// output1.innerHTML = slider1.value;
+				output1.innerHTML = "Normal";
 
 				slider1.oninput = function () {
-					output1.innerHTML = this.value;
+					// output1.innerHTML = this.value;
+					if (this.value == 1) {
+						output1.innerHTML = "I don't care";
+					}
+					else if (this.value == 2) {
+						output1.innerHTML = "Not very important";
+					}
+					else if (this.value == 3) {
+						output1.innerHTML = "Normal";
+					}
+					else if (this.value == 4) {
+						output1.innerHTML = "Important";
+					}
+					else if (this.value == 5) {
+						output1.innerHTML = "Very important";
+					}
 				}
 			</script>
 		</div>
@@ -94,7 +111,8 @@
 
 		<div class="border border-success"
 			style="border-bottom-width: 1px;margin-bottom: 0px;padding-bottom: 100px;padding-left: 25px;padding-right: 0px;margin-top: 10px;">
-			<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 40%;">2. How quiet do you like to be?
+			<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 40%;">2. How quiet do you like to
+				be?
 			</h5>
 			<div class="slidecontainer mt-3" style="float: left; width: 60%;clear: right;">
 				<input type="range" min="1" max="5" value="3" class="slider" id="r2">
@@ -103,10 +121,26 @@
 			<script>
 				var slider2 = document.getElementById("r2");
 				var output2 = document.getElementById("v2");
-				output2.innerHTML = slider1.value;
+				// output2.innerHTML = slider1.value;
+				output2.innerHTML = "Normal";
 
 				slider2.oninput = function () {
-					output2.innerHTML = this.value;
+					// output2.innerHTML = this.value;
+					if (this.value == 1) {
+						output2.innerHTML = "Very quiet";
+					}
+					else if (this.value == 2) {
+						output2.innerHTML = "Somewhat quiet";
+					}
+					else if (this.value == 3) {
+						output2.innerHTML = "Normal";
+					}
+					else if (this.value == 4) {
+						output2.innerHTML = "Somewhat loud";
+					}
+					else if (this.value == 5) {
+						output2.innerHTML = "Very loud";
+					}
 				}
 			</script>
 		</div>
@@ -114,8 +148,8 @@
 
 		<div class="border border-success"
 			style="border-bottom-width: 1px;margin-bottom: 0px;padding-bottom: 100px;padding-left: 25px;padding-right: 0px;margin-top: 10px;">
-			<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 40%;">3. How often do you bring friends
-				over?</h5>
+			<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 40%;">3. How often do you bring
+				friends over?</h5>
 			<div class="slidecontainer mt-3" style="float: left; width: 60%;clear: right;">
 				<input type="range" min="1" max="5" value="3" class="slider" id="r3">
 				<p style="float: right; padding-right: 200px;" id="v3"> </p>
@@ -123,10 +157,26 @@
 			<script>
 				var slider3 = document.getElementById("r3");
 				var output3 = document.getElementById("v3");
-				output3.innerHTML = slider1.value;
+				// output3.innerHTML = slider1.value;
+				output3.innerHTML = "Sometimes";
 
 				slider3.oninput = function () {
-					output3.innerHTML = this.value;
+					// output3.innerHTML = this.value;
+					if (this.value == 1) {
+						output3.innerHTML = "Never";
+					}
+					else if (this.value == 2) {
+						output3.innerHTML = "Rarely";
+					}
+					else if (this.value == 3) {
+						output3.innerHTML = "Sometimes";
+					}
+					else if (this.value == 4) {
+						output3.innerHTML = "Pretty often";
+					}
+					else if (this.value == 5) {
+						output3.innerHTML = "Almost always";
+					}
 				}
 			</script>
 		</div>
@@ -134,7 +184,8 @@
 
 		<div class="border border-success"
 			style="border-bottom-width: 1px;margin-bottom: 0px;padding-bottom: 100px;padding-left: 25px;padding-right: 0px;margin-top: 10px;">
-			<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 40%;">4. What time do you go to bed?</h5>
+			<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 40%;">4. What time do you go to
+				bed?</h5>
 			<div class="slidecontainer mt-3" style="float: left; width: 60%;clear: right;">
 				<input type="range" min="1" max="5" value="3" class="slider" id="r4">
 				<p style="float: right; padding-right: 200px;" id="v4"> </p>
@@ -142,10 +193,25 @@
 			<script>
 				var slider4 = document.getElementById("r4");
 				var output4 = document.getElementById("v4");
-				output4.innerHTML = slider4.value;
+				output4.innerHTML = "11:00-12:00";
 
 				slider4.oninput = function () {
-					output4.innerHTML = this.value;
+					// output4.innerHTML = this.value;
+					if (this.value == 1) {
+						output4.innerHTML = "Before 10:00";
+					}
+					else if (this.value == 2) {
+						output4.innerHTML = "10:00-11:00";
+					}
+					else if (this.value == 3) {
+						output4.innerHTML = "11:00-12:00";
+					}
+					else if (this.value == 4) {
+						output4.innerHTML = "12:00-2:00";
+					}
+					else if (this.value == 5) {
+						output4.innerHTML = "After 2:00";
+					}
 				}
 			</script>
 		</div>
@@ -153,7 +219,8 @@
 
 		<div class="border border-success"
 			style="border-bottom-width: 1px;margin-bottom: 0px;padding-bottom: 100px;padding-left: 25px;padding-right: 0px;margin-top: 10px;">
-			<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 40%;">5. How often do you cook at home?
+			<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 40%;">5. How often do you cook at
+				home?
 			</h5>
 			<div class="slidecontainer mt-3" style="float: left; width: 60%;clear: right;">
 				<input type="range" min="1" max="5" value="3" class="slider" id="r5">
@@ -162,10 +229,25 @@
 			<script>
 				var slider5 = document.getElementById("r5");
 				var output5 = document.getElementById("v5");
-				output5.innerHTML = slider5.value;
+				output5.innerHTML = "~1 time a week";
 
 				slider5.oninput = function () {
-					output5.innerHTML = this.value;
+					// output5.innerHTML = this.value;
+					if (this.value == 1) {
+						output5.innerHTML = "Less than 1 time a month";
+					}
+					else if (this.value == 2) {
+						output5.innerHTML = "1-2 times a month";
+					}
+					else if (this.value == 3) {
+						output5.innerHTML = "~1 time a week";
+					}
+					else if (this.value == 4) {
+						output5.innerHTML = "2-3 times a week";
+					}
+					else if (this.value == 5) {
+						output5.innerHTML = "Every day";
+					}
 				}
 			</script>
 		</div>
@@ -173,8 +255,8 @@
 
 		<div class="border border-success"
 			style="border-bottom-width: 1px;margin-bottom: 0px;padding-bottom: 100px;padding-left: 25px;padding-right: 0px;margin-top: 10px;">
-			<h5 class="font-weight-normal text-body mt-3" style="clear: both; float: left; width: 40%;">6. Are you around most
-				weekends?</h5>
+			<h5 class="font-weight-normal text-body mt-3" style="clear: both; float: left; width: 40%;">6. How often are
+				you around for the weekends?</h5>
 			<div class="slidecontainer mt-3" style="float: left; width: 60%;clear: right;">
 				<input type="range" min="1" max="5" value="3" class="slider" id="r6">
 				<p style="float: right; padding-right: 200px;" id="v6"> </p>
@@ -182,10 +264,24 @@
 			<script>
 				var slider6 = document.getElementById("r6");
 				var output6 = document.getElementById("v6");
-				output6.innerHTML = slider6.value;
+				output6.innerHTML = "1-2 times a month";
 
 				slider6.oninput = function () {
-					output6.innerHTML = this.value;
+					if (this.value == 1) {
+						output6.innerHTML = "Never";
+					}
+					else if (this.value == 2) {
+						output6.innerHTML = "0-1 times a month";
+					}
+					else if (this.value == 3) {
+						output6.innerHTML = "1-2 times a month";
+					}
+					else if (this.value == 4) {
+						output6.innerHTML = "2-3 times a month";
+					}
+					else if (this.value == 5) {
+						output6.innerHTML = "3 or more times a month";
+					}
 				}
 			</script>
 		</div>
@@ -194,8 +290,8 @@
 		<div class="border border-success"
 			style="border-bottom-width: 1px;margin-bottom: 0px;padding-bottom: 15px;padding-left: 25px;padding-right: 0px;margin-top: 10px;">
 			<div style="width: 100%; clear: both;">
-				<h5 class="font-weight-normal text-body mt-3" style="clear: both; float: left; width: 50%;">7. Do you allow
-					pet(s)?</h5>
+				<h5 class="font-weight-normal text-body mt-3" style="clear: both; float: left; width: 50%;">7. Do you
+					allow pet(s)?</h5>
 				<div class="btn-group btn-group-toggle" data-toggle="buttons" style="clear: right;margin-top: 15px;">
 					<label class="btn btn-outline-success mr-3">
 						<input type="radio" name="pet" id="petY" autocomplete="off">Yes
@@ -226,9 +322,11 @@
 
 		<div class="border border-success"
 			style="border-bottom-width: 1px;margin-bottom: 0px;padding-bottom: 15px;padding-left: 25px;padding-right: 0px;margin-top: 10px;">
-			<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 40%; clear: both; ">9. List all allergies
+			<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 40%; clear: both; ">9. List all
+				allergies
 				you have: </h5>
-			<textarea style="max-width: 750px;margin-top: 15px;" class="form-control" rows="5" id="description"></textarea>
+			<textarea style="max-width: 750px;margin-top: 15px;" class="form-control" rows="5"
+				id="description"></textarea>
 		</div>
 
 		<div class="text-center">
