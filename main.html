@@ -2,453 +2,422 @@
 <html lang="en">
 
 <head>
-	<title>Main</title>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Main</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<style>
-		#page td {
-			padding: 0;
-			margin: 0;
-		}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        #page td {
+            padding: 0;
+            margin: 0;
+        }
 
-		#page {
-			border-collapse: collapse;
-		}
-	</style>
+        #page {
+            border-collapse: collapse;
+        }
+    </style>
 </head>
-<header class="header">
-	<div class="float-left">
-		<p>
-			<button type="button" onclick="openCreatePost()" style="margin-left:50px;"
-				class="btn btn-dark btn-primary">Create Post</button>
+
+<body class="bg-light">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+<header>
+    <div class="float-left">
+        <p>
+			<button type="button" onclick="openCreatePost()" style="margin-left:50px;" class="btn btn-dark btn-primary" >Create Post</button>
 			<script>
 				function openCreatePost() {
-					var postWindow = window.open("post.html", "", "toolbar=yes,scrollbars=yes,resizable=yes,top=50,left=350,width=600,height=500");
-				}
-
-				window.addEventListener("message", function (event) {
-					showContent_recent(event.data[0], "e", event.data[1]);
+					var postWindow = window.open("post.html","", "toolbar=yes,scrollbars=yes,resizable=yes,top=50,left=350,width=600,height=500");
+					}
+				
+				window.addEventListener("message", function(event) {
+					showContent_recent(event.data[0], "e",event.data[1]);
 				});
 			</script>
-		</p>
-	</div>
-	<div class="float-right">
-		<a class="btn btn-dark btn-primary" href="login.html" role="button">Sign in / Go to Profile</a>
-		<!--
-			<button type="button" name="" id="" class="btn btn-dark" btn-lg btn-block">Sign in / Go to Profile</button>
-			-->
-	</div>
-
-	<div class="text-center mb-5">
-		<img src="image/Logo.png" class="rounded" width="500">
-	</div>
-
-	<div class="container">
-		<form method="get" action="main.html" class="text-center">
+        </p>
+    </div>
+    <div class="float-right">
+            <a class="btn btn-dark btn-primary" href="login.html" role="button">Sign in / Go to Profile</a>
+        <!--
+        <button type="button" name="" id="" class="btn btn-dark" btn-lg btn-block">Sign in / Go to Profile</button>
+        -->
+    </div>
+    
+    <div class="text-center mt-5 mb-5">
+        <img src="Logo_tamp.png" class="rounded" width="500">
+    </div>
+    <div class="container">
+        <form method="get" action="main.html" class="text-center">
 			<script>
 				// This is the function to search for posts
-				function search_post(val) {
+				function search_post(val)
+				{
 					val = val.toLowerCase();
 					var outer = document.getElementsByClassName("recent_post")[0];
 					var children = outer.children;
-
+					
 					for (i = 0; i < children.length; i++) {
-						if (children[i].innerText.toLowerCase().includes(val)) {
+						if (children[i].innerText.toLowerCase().includes(val))
+						{
 							children[i].style.display = "";
 							//highlight in title
 							var innerText = children[i].children[0].children[0].innerText;
 							var index = innerText.indexOf(val);
-							if (index >= 0) {
-								innerText = innerText.substring(0, index) + "<span style=\"background-color: SkyBlue\">" + innerText.substring(index, index + val.length) + "</span>" + innerText.substring(index + val.length);
+							if (index >= 0)
+							{
+								innerText = innerText.substring(0,index) + "<span style=\"background-color: SkyBlue\">" + innerText.substring(index,index+val.length) + "</span>" + innerText.substring(index + val.length);
 							}
-							else {
-								innerText = "<span style=\"background-color: azure\">" + innerText.substring(0, index) + innerText.substring(index, index + val.length) + innerText.substring(index + val.length) + "</span>";
+							else
+							{
+								innerText = "<span style=\"background-color: azure\">" + innerText.substring(0,index) + innerText.substring(index,index+val.length) + innerText.substring(index + val.length) + "</span>";
 							}
 							children[i].children[0].children[0].innerHTML = innerText;
 							//highlight in author name
 							innerText = children[i].children[0].children[1].innerText;
 							index = innerText.indexOf(val);
-							if (index >= 0) {
-								innerText = innerText.substring(0, index) + "<span style=\"background-color: SkyBlue\">" + innerText.substring(index, index + val.length) + "</span>" + innerText.substring(index + val.length);
+							if (index >= 0)
+							{
+								innerText = innerText.substring(0,index) + "<span style=\"background-color: SkyBlue\">" + innerText.substring(index,index+val.length) + "</span>" + innerText.substring(index + val.length);
 							}
-							else {
-								innerText = "<span style=\"background-color: azure\">" + innerText.substring(0, index) + innerText.substring(index, index + val.length) + innerText.substring(index + val.length) + "</span>";
+							else
+							{
+								innerText = "<span style=\"background-color: azure\">" + innerText.substring(0,index) + innerText.substring(index,index+val.length) + innerText.substring(index + val.length) + "</span>";
 							}
 							children[i].children[0].children[1].innerHTML = innerText;
 							//highlight in post body
 							innerText = children[i].children[0].children[2].innerText;
 							index = innerText.indexOf(val);
-							if (index >= 0) {
-								innerText = innerText.substring(0, index) + "<span style=\"background-color: SkyBlue\">" + innerText.substring(index, index + val.length) + "</span>" + innerText.substring(index + val.length);
+							if (index >= 0)
+							{
+								innerText = innerText.substring(0,index) + "<span style=\"background-color: SkyBlue\">" + innerText.substring(index,index+val.length) + "</span>" + innerText.substring(index + val.length);
 							}
-							else {
-								innerText = "<span style=\"background-color: azure\">" + innerText.substring(0, index) + innerText.substring(index, index + val.length) + innerText.substring(index + val.length) + "</span>";
+							else
+							{
+								innerText = "<span style=\"background-color: azure\">" + innerText.substring(0,index) + innerText.substring(index,index+val.length) + innerText.substring(index + val.length) + "</span>";
 							}
 							children[i].children[0].children[2].innerHTML = innerText;
 						}
-						else {
+						else 
+						{
 							children[i].style.display = "none";
 						}
 					}
 				}
 			</script>
-			<div>
-				<input type="text" placeholder="Search for a post..." class="search-input" name="search"
-					onkeyup="search_post(this.value)">
-				<input type="image" src="image/Search.png" alt="Submit" width="25">
-				<p id="filter_noti" style="margin:15px auto;"></p>
-			</div>
-		</form>
-	</div>
-
-	<center>
-		<div id="filter" class="filter">
-			<span id="filter-head" style="font-weight:bold; margin-right:59px;"><font class="font-weight-bolder text-success">Filter</font></span>
-			<span id="filter-options" class="filter-options text-success">
-				Cleanliness:
-				<select id="cleanliness" onchange="filter();"> Cleanliness:
-					<option value="3"> Very important </option>
-					<option value="2"> Preferable </option>
-					<option value="1"> Doesn't matter </option>
-				</select>
-				Quietness:
-				<select onchange="filter();">
-					<option value="4">Above average</option>
-					<option value="3">Average</option>
-					<option value="2">Below average</option>
-					<option value="1">Doesn't matter</option>
-				</select>
-				Pet Friendliness:
-				<select onchange="filter();">
-					<option value="3">Pet Friendly</option>
-					<option value="2">No pets</option>
-					<option value="1">Doesn't matter</option>
-				</select>
-				Smoking:
-				<select onchange="filter();">
-					<option value="3">No smoking</option>
-					<option value="2">Smoking is okay</option>
-					<option value="1">Doesn't matter</option>
-				</select>
-			</span>
-		</div>
-	</center>
-
+            <input type="text" placeholder="Search for a post..." class="search-input" name="search" onkeyup="search_post(this.value)">
+			<p id="filter_noti" style="margin:15px auto;"></p>
+           
+        </form>
+    </div>
 </header>
-
-<body class="bg-light">
-
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
-
-
-	<section class="posts">
-		<div class="container-fluid">
-			<div class="row">
-				<script>
-					//assume this user's reference is 1,2,1,1
-					function handle_rec_post(me) {
-						//get currently displayed posts
-						var outer = document.getElementsByClassName("recent_post")[0];
-						var children = outer.children;
-						var displaying = []
-						for (i = 0; i < children.length; i++) {
-							if (children[i].style.display == "") {
-								displaying.push(i);
-							}
-						}
-
-						var count = 0;
-						if (me.checked == true) {
-							displaying.forEach(function (i) {
-								if (children[i].classList.contains("clean" + 1) &&
-									children[i].classList.contains("quiet" + 2) &&
-									children[i].classList.contains("pet" + 1) &&
-									children[i].classList.contains("smoke" + 1)) {
-									count += 1;
-									children[i].style.display = "";
-								}
-								else {
-									children[i].style.display = "none";
-								}
-							})
-							document.getElementById("filter_noti").innerHTML = count + " results found from your personal preference and filter criterias.";
-						}
-						else {
-							displaying.forEach(function (i) {
-								children[i].style.display = "";
-								count += 1;
-							})
-							document.getElementById("filter_noti").innerHTML = count + " results found from your filter criterias.";
-						}
+<section class="posts">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="sidebar">
+                <button class="collapsible">Filter</button>
+                    <div class="content">
+					<input type="checkbox" name="filter_rec_post" value="no" onchange="handle_rec_post(this)">Show recommended posts<br>
+                    <div>
+                        <button class="collapsible">Cleanliness</button>
+                        <div class="innercontent">
+                            <a>Select level of cleanliness: </a>
+                            <select onchange="filter();">
+								<option value="3">Very important</option>
+								<option value="2">Preferable</option>
+								<option value="1">Doesn't matter</option>           
+                            </select>
+                        </div>
+                    </div>
+                        
+                    <div>
+                        <button class="collapsible">Quietness</button>
+                        <div class="innercontent">
+                            <a>Select importance of quietness: </a>
+                            <select onchange="filter();">
+								<option value="4">Above average</option>
+								<option value="3">Average</option>
+								<option value="2">Below average</option>
+								<option value="1">Doesn't matter</option>            
+                            </select>
+                        </div>
+                    </div>
+            
+                    <div>
+                        <button class="collapsible">Pet friendliness</button>
+                        <div class="innercontent">
+                            <a>Select preference: </a>
+                            <select onchange="filter();">
+								<option value="3">Pet Friendly</option>
+								<option value="2">No pets</option>
+								<option value="1">Doesn't matter</option>            
+                            </select>
+                        </div>
+                    </div>
+                        
+                    <div>
+                        <button class="collapsible">Smoking preference</button>
+                        <div class="innercontent">
+                            <a>Select preference: </a>
+                            <select onchange="filter();">
+								<option value="2"Smoking is okay</option>
+								<option value="3">No smoking</option>
+								<option value="1">Doesn't matter</option>            
+                            </select>
+                        </div>
+                    </div>
+					<a class="btn btn-dark btn-primary mt-5 ml-3" href="" onclick="clear_filter()" role="button">Clear filter</a>
+					
+                    </div> 
+                </div>
+			
+			<script>
+			//assume this user's reference is 1,2,1,1
+			function handle_rec_post(me)
+			{
+				//get currently displayed posts
+				var outer = document.getElementsByClassName("recent_post")[0];
+				var children = outer.children;
+				var displaying = []
+				for (i = 0; i < children.length; i++) {
+					if (children[i].style.display == "")
+					{
+						displaying.push(i);
 					}
-
-					function clear_filter() {
-						document.getElementById("filter_noti").innerHTML = "";
-						var outer = document.getElementsByClassName("recent_post")[0];
-						outer.children.style.display = "";
+				}
+				
+				var count = 0;
+				if (me.checked == true)
+				{
+					displaying.forEach(function(i)
+					{
+						if (children[i].classList.contains("clean" + 1) &&
+						children[i].classList.contains("quiet" + 2) &&
+						children[i].classList.contains("pet" + 1) &&
+						children[i].classList.contains("smoke" + 1))
+						{
+							count += 1;
+							children[i].style.display = "";
+						}
+						else
+						{
+							children[i].style.display = "none";
+						}
+					})
+					document.getElementById("filter_noti").innerHTML = count + " results found from your personal preference and filter criterias.";
+				}
+				else
+				{
+					displaying.forEach(function(i)
+					{
+						children[i].style.display = "";
+						count += 1;
+					})
+					document.getElementById("filter_noti").innerHTML = count + " results found from your filter criterias.";
+				}
+			}
+			
+			function clear_filter()
+			{
+				document.getElementById("filter_noti").innerHTML = "";
+				var outer = document.getElementsByClassName("recent_post")[0];
+				outer.children.style.display = "";
+			}
+			
+			function filter()
+			{
+				var a = document.getElementsByTagName("select");
+				var current_values = []
+				for (i=0; i< a.length; i++)
+				{
+					current_values.push(a[i].value);
+					console.log(a[i].value);
+				}
+				
+				var count = 0;
+				var outer = document.getElementsByClassName("recent_post")[0];
+				var children = outer.children;
+					
+				for (i = 0; i < children.length; i++) {
+					if (children[i].classList.contains("clean" + current_values[0]) &&
+					children[i].classList.contains("quiet" + current_values[1]) &&
+					children[i].classList.contains("pet" + current_values[2]) &&
+					children[i].classList.contains("smoke" + current_values[3]))
+					{
+						count += 1;
+						children[i].style.display = "";
 					}
-
-					function filter() {
-						var a = document.getElementsByTagName("select");
-						var current_values = []
-						for (i = 0; i < a.length; i++) {
-							current_values.push(a[i].value);
-							console.log(a[i].value);
-						}
-
-						var count = 0;
-						var outer = document.getElementsByClassName("recent_post")[0];
-						var children = outer.children;
-
-						for (i = 0; i < children.length; i++) {
-							if (children[i].classList.contains("clean" + current_values[0]) &&
-								children[i].classList.contains("quiet" + current_values[1]) &&
-								children[i].classList.contains("pet" + current_values[2]) &&
-								children[i].classList.contains("smoke" + current_values[3])) {
-								count += 1;
-								children[i].style.display = "";
-							}
-							else {
-								children[i].style.display = "none";
-							}
-						}
-
-						document.getElementById("filter_noti").innerHTML = count + " results found from your filter criterias.";
+					else
+					{
+						children[i].style.display = "none";
 					}
-
-					function save() {
-						alert("saved");
-					}
-				</script>
-
-				<!-- RECENT POSTS -->
-				<template id="recent_template">
-						<span class="post-container">
-							<div class="post_content" style="text-align: left">
-								<p class="title text-dark text-left" style="font-weight:bold"> Female roommate needed</h3>
-								<hr noshade width:90%>
-								<p class="author text-dark text-left">Ryan Tran</p>
-								<p class="story text-dark" >This is where the description of the post would go. <p>
-							</div>
-							<!--div class="timestamp text-dark"> Posted at 7:41pm August 24, 2018 </div-->
-							<a name="" id="" class="btn" href="#" role="button" style="background-color: darkkhaki; float:left;"
-								onclick="save()">Save</a>
-							<button name="" id="" class="btn float-right" onclick="contact()" type="button"
-								style="background-color: BurlyWood;">Contact</button>
-							<script>
-								function contact() {
-									var contactWindow = window.open("contact.html", "", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=350,width=600,height=400");
-								}
-							</script>
-						</span>
-					</template>
-
-				<style>
-					@keyframes glow {
-						0% {
-							background-color: SpringGreen;
+				}
+				
+				document.getElementById("filter_noti").innerHTML = count + " results found from your filter criterias.";
+			}
+			
+			function save() {
+				alert("saved");
+			}
+			</script>
+			
+			<!-- RECENT POSTS -->
+			<template id="recent_template">
+				<span class="post container border border-primary rounded" style="padding: 5px; background-color: Cornsilk; border-width:3px !important; border-style: dashed !important; width:30%; float: left; margin: 10px;">
+					<div class="post_content">
+						<h6 class="title text-dark text-center" > Female roommate needed</h6>
+						<h6 class="author text-dark text-center">Ryan Tran</h6>
+						<p class="story text-dark">This is where the description of the post would go. </p>
+					</div>
+					<!--div class="timestamp text-dark"> Posted at 7:41pm August 24, 2018 </div-->
+					<a name="" id="" class="btn" href="#" role="button" style="background-color: darkkhaki;" onclick="save()">Save</a>
+					<button name="" id="" class="btn float-right" onclick="contact()" type="button" style="background-color: BurlyWood;">Contact</button>
+					<script>
+						function contact() {
+							var contactWindow = window.open("contact.html","", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=350,width=600,height=400");
 						}
-
-						30% {
-							background-color: MistyRose;
-						}
-
-						50% {
-							background-color: SandyBrown;
-						}
-
-						100% {
-							background-color: Cornsilk;
-						}
-					}
-				</style>
-
-				<script>
-					//clean 1=doesnot matter, 2=preferable, 3=very important
-					//quiet 1=doesnot matter, 2=below average, 3=average, 4=above average
-					//pet 1=doesnot matter, 2= not pets, 3=pet friendly
-					//smoke 1=doesnot matter, 2=smoking is ok, 3=no smoke
-					function showContent_recent(title, author, content, clean, quiet, pet, smoke) {
-						var temp = document.getElementById("recent_template");
-						var clone = document.importNode(temp.content, true);
-						clone.querySelector(".title").textContent = title;
-						clone.querySelector(".author").textContent = author;
-						clone.querySelector(".story").textContent = content;
-						clone.firstElementChild.classList.add("clean" + clean);
-						clone.firstElementChild.classList.add("quiet" + quiet);
-						clone.firstElementChild.classList.add("pet" + pet);
-						clone.firstElementChild.classList.add("smoke" + smoke);
-						//add animation
-						clone.firstElementChild.style.animation = "glow 4s";
-						document.body.getElementsByClassName("recent_post")[0].insertBefore(clone, document.body.getElementsByClassName("recent_post")[0].firstChild);
-					}
-				</script>
-
-				<div class="recent_post" style="width: 90%;">
-				</div>
-				<script>
-						// 3, 4, 3, 3
-						//sample posts -clean, quiet, pet, smoke <= look at 10 lines above
-						showContent_recent("Looking for summer roommate", "John D", 
-						"Fully furnished, walk-up apartment in older home. Bring clothes and computer, and move in. ", 3, 4, 3, 1);
-						showContent_recent("McEachern dorm - looking for male roommate", "Jeff H", "Please be tidy and respectful, msg me for details.", 2, 2, 1, 1);
-						showContent_recent("$582 / 2br - 660ft2", "Kimmy H", "Need a roommate for fall semester. Rent includes water, sewer, and garbage. ", 3, 2, 1, 1);
-						showContent_recent("Pioneer Hill Quiet Private Apartment", "Josh D", "Looking for fall semester roommate. Available August 10th for year lease. ", 3, 3, 1, 2);
-						showContent_recent(" $625 / 2br - 2 bed, 1 bath, W&D available June 1 ", "Kelsey G", "Must be female, please send message", 1, 1, 2, 1);
-						showContent_recent("Carol's Cozy Living", "Carol A", "Need roommate for my apartment. Near school, good wifi. Contact for more info.", 2, 2, 1, 1);
-						showContent_recent("Lower unit 2 bedroom house", "Jason N", "2 bedroom 1 bath & W/D, lower unit of house on Dillon Street. You pay $845/month as well as electrical and gas. ", 1, 4, 3, 2);
-						showContent_recent("Nez Pierce apts -- looking for 2 roommates", "Dan B", "305 Grand ave. looking for 2 good roommates for fall semester", 3, 3, 1, 1);
-						showContent_recent("Nez Pierce apts -- looking for 2 roommates", "Dan B", "305 Grand ave. looking for 2 good roommates for fall semester", 3, 3, 1, 1);
 					</script>
-
-
+				</span>
+			</template>
+			
+			<style>
+				@keyframes glow {
+					0%   {background-color: SpringGreen;}
+					30%  {background-color: MistyRose;}
+				    50%  {background-color: SandyBrown;}
+					100% {background-color: Cornsilk;}
+					}
+			</style>
+			
+			<script>
+			//clean 1=doesnot matter, 2=preferable, 3=very important
+			//quiet 1=doesnot matter, 2=below average, 3=average, 4=above average
+			//pet 1=doesnot matter, 2= not pets, 3=pet friendly
+			//smoke 1=doesnot matter, 2=smoking is ok, 3=no smoke
+			function showContent_recent(title, author, content, clean, quiet, pet, smoke) {
+			  var temp = document.getElementById("recent_template");
+			  var clone = document.importNode(temp.content, true);
+			  clone.querySelector(".title").textContent = title;
+			  clone.querySelector(".author").textContent = author;
+			  clone.querySelector(".story").textContent = content;
+			  clone.firstElementChild.classList.add("clean"+clean);
+			  clone.firstElementChild.classList.add("quiet"+quiet);
+			  clone.firstElementChild.classList.add("pet"+pet);
+			  clone.firstElementChild.classList.add("smoke"+smoke);
+			  //add animation
+			  clone.firstElementChild.style.animation = "glow 4s";
+			  document.body.getElementsByClassName("recent_post")[0].insertBefore(clone, document.body.getElementsByClassName("recent_post")[0].firstChild);
+			}
+			</script>
+			
+			<div class="recent_post" style="margin-left: 20%; width: 80%;">
 			</div>
-		</div>
-	</section>
+			<script>
+				//sample posts -clean, quiet, pet, smoke <= look at 10 lines above
+				showContent_recent("t1","author1","fill in content", 1, 2,1,1);
+				showContent_recent("t2","b","asdfa", 2, 2,1,1);
+				showContent_recent("t3","c","asdf", 1, 2,1,1);
+				showContent_recent("t4","d","adf", 2, 3,1,1);
+			</script>
+			
+			
+        </div>
+    </div>
+</section>
 </body>
 
 </html>
 
 <style>
-	.header {
-		padding: 10px 16px;
-		background: #b3ffb3;
-		color: #f1f1f1;
-	}
+.sidebar {
+  background-color: #00ff00;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  margin-top: 10px;
+  left: 10px;
+}
 
-	.post-container {
-		background-color: cornsilk;
-		border-width: 3px !important;
-		border-style: dashed !important;
-		width: 27%;
-		float: left;
-		margin: 3%;
-	}
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
 
-	.posts {
-		width: 100%;
-	}
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
 
-	.recent_post {
-		width: 90%;
-	}
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: block;
+  background-color: #eee;
+  overflow: hidden;
+  font-size: 15px;
+}
 
-	.clontainer-fluid {
-		width: 100%;
-	}
+.innercontent {
+  padding: 0 18px;
+  display: none;
+  background-color: #eee;
+  overflow: hidden;
+  font-size: 15px;
 
-	.filter {
-		width:90%;
-	}
-/* 
-	.filter-head {
-		font-weight: bold;
-		width: 15%;
-		float: left; 
-	}
-*/
-	.filter-options {
+}
 
-	}
 
-	.filter-options select {
-		margin-right: 15px;
-		width: auto;
-	}
+.slidecontainer {
+  width: 45%; /* Width of the outside container */
+}
 
-	.collapsible-header {
-		background-color: #eee;
-		color: #444;
-		cursor: pointer;
-		padding: 18px;
-		width: 100%;
-		border: none;
-		text-align: center;
-		outline: none;
-		font-size: 15px;
-	}
-
-	.collapsible {
-		background-color: #eee;
-		color: #444;
-		cursor: pointer;
-		padding: 18px;
-		width: 25%;
-		border: none;
-		text-align: left;
-		outline: none;
-		font-size: 15px;
-		display: inline-block;
-	}
-
-	/* Style the collapsible content. Note: hidden by default */
-	.content {
-		padding: 0 18px;
-		display: none;
-		background-color: #eee;
-		overflow: hidden;
-		font-size: 15px;
-	}
-
-	.innercontent {
-		padding: 0 18px;
-		display: none;
-		background-color: #eee;
-		overflow: hidden;
-		font-size: 15px;
-	}
-
-	/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-	.active,
-	.collapsible:hover {
-		background-color: #ccc;
-	}
-
-	.slidecontainer {
-		width: 45%;
-		/* Width of the outside container */
-	}
-	
 </style>
 
 
 <script>
-	var coll = document.getElementsByClassName("collapsible");
-	var i;
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
 
-	for (i = 0; i < coll.length; i++) {
-		coll[i].addEventListener("click", function () {
-			this.classList.toggle("active");
-			var content = this.nextElementSibling;
-			if (content.style.display === "block") {
-				content.style.display = "none";
-			} else {
-				content.style.display = "block";
-			}
-		});
-	}
+    for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+        content.style.display = "none";
+        } else {
+        content.style.display = "block";
+        }
+    });
+    } 
 
-	var slider = document.getElementById("myRange");
-	var output = document.getElementById("demo");
-	output.innerHTML = slider.value; // Display the default slider value
-	output.style.left = "100px";
-	//Update the current slider value (each time you drag the slider handle)
-	slider.oninput = function () {
-		output.innerHTML = this.value;
-	} 
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value; // Display the default slider value
+    output.style.left = "100px"; 
+
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function() {
+    output.innerHTML = this.value;
+    } 
 </script>
