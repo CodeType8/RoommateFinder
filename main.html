@@ -101,15 +101,21 @@
 				<input type="text" placeholder="Search for a post..." class="search-input" name="search"
 					onkeyup="search_post(this.value)">
 				<input type="image" src="image/Search.png" alt="Submit" width="25">
-				<p id="filter_noti" style="margin:15px auto;"></p>
+				<p id="filter_noti" style="margin:15px auto; color: black;"></p>
 			</div>
 		</form>
 	</div>
 
 	<center>
-		<div id="filter" class="filter">
+		<div id="filter" class="filter" style="color: black";>
 			<span id="filter-head" style="font-weight:bold; margin-right:59px;">Filter</span>
 			<span id="filter-options" class="filter-options">
+				
+				<input type="checkbox" name="filter_rec_post" value="no" onchange="handle_rec_post(this)">
+				
+				<span style="padding-right:20px;">Show recommended posts</span>
+
+
 				Cleanliness:
 				<select id="cleanliness" onchange="filter();"> Cleanliness:
 					<option value="3"> Very important </option>
@@ -175,9 +181,10 @@
 						var count = 0;
 						if (me.checked == true) {
 							displaying.forEach(function (i) {
-								if (children[i].classList.contains("clean" + 1) &&
-									children[i].classList.contains("quiet" + 2) &&
-									children[i].classList.contains("pet" + 1) &&
+								// make these values not hard-coded
+								if (children[i].classList.contains("clean" + 1) ||
+									children[i].classList.contains("quiet" + 2) ||
+									children[i].classList.contains("pet" + 1) ||
 									children[i].classList.contains("smoke" + 1)) {
 									count += 1;
 									children[i].style.display = "";
@@ -239,17 +246,17 @@
 				<!-- RECENT POSTS -->
 				<template id="recent_template">
 						<span class="post-container">
-							<div class="post_content" style="text-align: left">
+							<div class="post_content" style="text-align: left; padding: 5px;">
 								<p class="title text-dark text-left" style="font-weight:bold"> Female roommate needed</h3>
 								<hr noshade width:90%>
 								<p class="author text-dark text-left">Ryan Tran</p>
 								<p class="story text-dark" >This is where the description of the post would go. <p>
 							</div>
 							<!--div class="timestamp text-dark"> Posted at 7:41pm August 24, 2018 </div-->
-							<a name="" id="" class="btn" href="#" role="button" style="background-color: darkkhaki; float:left;"
+							<a name="" id="" class="btn" href="#" role="button" style="background-color: darkkhaki; float:left; padding: 5px;"
 								onclick="save()">Save</a>
 							<button name="" id="" class="btn float-right" onclick="contact()" type="button"
-								style="background-color: BurlyWood;">Contact</button>
+								style="background-color: BurlyWood; padding: 5px;">Contact</button>
 							<script>
 								function contact() {
 									var contactWindow = window.open("contact.html", "", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=350,width=600,height=400");
@@ -299,7 +306,7 @@
 					}
 				</script>
 
-				<div class="recent_post" style="width: 90%;">
+				<div class="recent_post" style="width: 100%; padding: 5px;">
 				</div>
 				<script>
 						// 3, 4, 3, 3
@@ -312,7 +319,6 @@
 						showContent_recent(" $625 / 2br - 2 bed, 1 bath, W&D available June 1 ", "Kelsey G", "Must be female, please send message", 1, 1, 2, 1);
 						showContent_recent("Carol's Cozy Living", "Carol A", "Need roommate for my apartment. Near school, good wifi. Contact for more info.", 2, 2, 1, 1);
 						showContent_recent("Lower unit 2 bedroom house", "Jason N", "2 bedroom 1 bath & W/D, lower unit of house on Dillon Street. You pay $845/month as well as electrical and gas. ", 1, 4, 3, 2);
-						showContent_recent("Nez Pierce apts -- looking for 2 roommates", "Dan B", "305 Grand ave. looking for 2 good roommates for fall semester", 3, 3, 1, 1);
 						showContent_recent("Nez Pierce apts -- looking for 2 roommates", "Dan B", "305 Grand ave. looking for 2 good roommates for fall semester", 3, 3, 1, 1);
 					</script>
 
@@ -346,6 +352,7 @@
 
 	.recent_post {
 		width: 90%;
+		height: 100px;
 	}
 
 	.clontainer-fluid {
@@ -353,22 +360,19 @@
 	}
 
 	.filter {
-		width:90%;
+		width: 95%;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow:ellipsis;
 	}
-/* 
-	.filter-head {
-		font-weight: bold;
-		width: 15%;
-		float: left; 
-	}
-*/
-	.filter-options {
 
+	.filter-options {
+		width: 90%;
 	}
 
 	.filter-options select {
-		margin-right: 15px;
-		width: auto;
+		margin-left: 5px;
+		margin-right: 5px;
 	}
 
 	.collapsible-header {
