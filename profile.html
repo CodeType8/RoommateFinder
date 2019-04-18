@@ -53,10 +53,14 @@
         crossorigin="anonymous"></script>
 
     <div class="text-center mt-5 mb-5">
-        <img src="Logo_tamp.png" class="rounded" width="500" alt="...">
+        <img src="image/Logo.png" class="rounded" width="500" alt="...">
+        <h3 class="font-weight-normal text-success mt-3">User Profile</h3>
     </div>
     <div class="container-fluid" style="margin-left: 200px;">
         <div class="row">
+            <div class="container float-left">
+                    <h6 class="font-weight-bold text-danger">Items marked with * are required.
+            </div>
             <!-- Profile picture in this container. -->
             <div class="container float-left">
                 <h5 class="font-weight-normal text-body col mt-3">Profile Picture</h6>
@@ -67,7 +71,7 @@
                 <form>
                     <div class="form-group">
                         <label for="fullName" class="float-left col">
-                            <h5 class="text-body font-weight-normal mt-5">Full Name*</h5>
+                            <h5 class="text-body font-weight-normal mt-5">Full Name <font class="text-danger font-weight-bolder mt-5">* </font></h5>
                         </label>
                         <input style="max-width: 500px;" class="form-control" id="fullName" placeholder="Anna Tran">
                     </div>
@@ -92,7 +96,7 @@
                         </div>
                     </div><br>
                     <label for="gender" class="col">
-                        <h5 class="text-body font-weight-normal mt-3">Gender*</h5>
+                        <h5 class="text-body font-weight-normal mt-3">Gender <font class="text-danger font-weight-bolder mt-5">* </font></h5>
                     </label>
                     <div id="gender">
                         <div class="form-check">
@@ -124,9 +128,11 @@
                             Select Race
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">There is too</a>
-                            <a class="dropdown-item" href="#">many of these to</a>
-                            <a class="dropdown-item" href="#">write them all down</a>
+                            <a class="dropdown-item" href="#">White</a>
+                            <a class="dropdown-item" href="#">Hispanic/Latino</a>
+                            <a class="dropdown-item" href="#">African American</a>
+                            <a class="dropdown-item" href="#">Native American</a>
+                            <a class="dropdown-item" href="#">Asian</a>
                         </div>
                     </div>
                     <div class="form-group">
