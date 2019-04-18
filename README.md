@@ -8,6 +8,6 @@ Team member:
   Yongmin Joh,
   Ngoc Duong,
   Sean Luchessa,
-  SCott Bogen
+  Scott Bogen
 
 RoommateFinder
