@@ -54,7 +54,7 @@
 
     <div class="text-center mt-5 mb-5">
         <img src="image/Logo.png" class="rounded" width="500" alt="...">
-        <h3 class="font-weight-normal text-success mt-3">User Profile</h3>
+        <h3 class="font-weight-bold text-success mt-3">User Profile</h3>
     </div>
     <div class="container-fluid" style="margin-left: 200px;">
         <div class="row">
@@ -85,15 +85,11 @@
                         <label for="age" class="float-left col">
                             <h5 class="text-body font-weight-normal mt-3">Age</h5>
                         </label>
-                        <button class="btn btn-dark dropdown-toggle" type="button" id="age" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Select Age
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">18-25</a>
-                            <a class="dropdown-item" href="#">25-30</a>
-                            <a class="dropdown-item" href="#">30+</a>
-                        </div>
+						<select >
+							  <option value="18-25">18-25</option>
+							  <option value="25-30">25-30</option>
+							  <option value="30+">30+</option>
+						</select>						
                     </div><br>
                     <label for="gender" class="col">
                         <h5 class="text-body font-weight-normal mt-3">Gender <font class="text-danger font-weight-bolder mt-5">* </font></h5>
@@ -123,17 +119,13 @@
                         <label for="race" class="float-left col">
                             <h5 class="text-body font-weight-normal mt-3">Race</h5>
                         </label>
-                        <button class="btn btn-dark dropdown-toggle" type="button" id="race" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Select Race
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">White</a>
-                            <a class="dropdown-item" href="#">Hispanic/Latino</a>
-                            <a class="dropdown-item" href="#">African American</a>
-                            <a class="dropdown-item" href="#">Native American</a>
-                            <a class="dropdown-item" href="#">Asian</a>
-                        </div>
+						<select >
+							  <option value="White">White</option>
+							  <option value="Hispanic/Latino">Hispanic/Latino</option>
+							  <option value="African American">African American</option>
+							  <option value="Native American">Native American</option>
+							  <option value="Asian">Asian</option>
+						</select>
                     </div>
                     <div class="form-group">
                         <label for="description"><h5 class="text-body font-weight-normal mt-5">Describe yourself:</h5></label>
@@ -147,8 +139,8 @@
                         <a href="#" class="fa fa-twitter"></a>
                     </div>
                     <div class="text-center">
-                        <a class="btn btn-dark btn-primary mr-3" href="main.html" role="button">Cancel</a>
-                        <a class="btn btn-dark btn-primary ml-3" href="question.html" role="button">Continue</a>
+                        <a class="btn font-weight-bold btn-secondary mr-3" href="main.html" role="button">Cancel</a>
+                        <a class="btn font-weight-bold btn-primary ml-3" href="question.html" role="button">Continue</a>
                         <!--
                     <button type="button" class="btn btn-dark instructor_login">Cancel</button>
                     <button type="button" class="btn btn-dark instructor_login">Continue</button>

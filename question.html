@@ -14,7 +14,7 @@
 <header>
 	<div class="text-center mt-5">
 		<img src="image/Logo.png" width="500" align="middle" /><br>
-		<h3 class="font-weight-normal text-success mt-3">Questionnaire</h3>
+		<h3 class="font-weight-bold text-success mt-3">Questionnaire</h3>
 		<h5 class="font-weight-normal text-muted mt-3 mb-5">Your answers for the questions below will help to find your
 			perfect match. </h5>
 	</div>
@@ -79,7 +79,7 @@
 			</h5>
 			<div class="slidecontainer mt-3" style="float: left; width: 60%;clear: right;">
 				<input type="range" min="1" max="5" value="3" class="slider" id="r1">
-				<p style="float: right; padding-right: 200px;" id="v1"> </p>
+				<p style="float: right; padding-right: 100px;" id="v1"> </p>
 			</div>
 			<script>
 				var slider1 = document.getElementById("r1");
@@ -116,7 +116,7 @@
 			</h5>
 			<div class="slidecontainer mt-3" style="float: left; width: 60%;clear: right;">
 				<input type="range" min="1" max="5" value="3" class="slider" id="r2">
-				<p style="float: right; padding-right: 200px;" id="v2"> </p>
+				<p style="float: right; padding-right: 100px;" id="v2"> </p>
 			</div>
 			<script>
 				var slider2 = document.getElementById("r2");
@@ -152,7 +152,7 @@
 				friends over?</h5>
 			<div class="slidecontainer mt-3" style="float: left; width: 60%;clear: right;">
 				<input type="range" min="1" max="5" value="3" class="slider" id="r3">
-				<p style="float: right; padding-right: 200px;" id="v3"> </p>
+				<p style="float: right; padding-right: 100px;" id="v3"> </p>
 			</div>
 			<script>
 				var slider3 = document.getElementById("r3");
@@ -188,7 +188,7 @@
 				bed?</h5>
 			<div class="slidecontainer mt-3" style="float: left; width: 60%;clear: right;">
 				<input type="range" min="1" max="5" value="3" class="slider" id="r4">
-				<p style="float: right; padding-right: 200px;" id="v4"> </p>
+				<p style="float: right; padding-right: 100px;" id="v4"> </p>
 			</div>
 			<script>
 				var slider4 = document.getElementById("r4");
@@ -224,7 +224,7 @@
 			</h5>
 			<div class="slidecontainer mt-3" style="float: left; width: 60%;clear: right;">
 				<input type="range" min="1" max="5" value="3" class="slider" id="r5">
-				<p style="float: right; padding-right: 200px;" id="v5"> </p>
+				<p style="float: right; padding-right: 100px;" id="v5"> </p>
 			</div>
 			<script>
 				var slider5 = document.getElementById("r5");
@@ -259,7 +259,7 @@
 				you around for the weekends?</h5>
 			<div class="slidecontainer mt-3" style="float: left; width: 60%;clear: right;">
 				<input type="range" min="1" max="5" value="3" class="slider" id="r6">
-				<p style="float: right; padding-right: 200px;" id="v6"> </p>
+				<p style="float: right; padding-right: 100px;" id="v6"> </p>
 			</div>
 			<script>
 				var slider6 = document.getElementById("r6");
@@ -286,11 +286,42 @@
 			</script>
 		</div>
 
+		<div class="border border-success"
+			style="border-bottom-width: 1px;margin-bottom: 0px;padding-bottom: 100px;padding-left: 25px;padding-right: 0px;margin-top: 10px;">
+			<h5 class="font-weight-normal text-body mt-3" style="clear: both; float: left; width: 40%;">7. How often do you drink?</h5>
+			<div class="slidecontainer mt-3" style="float: left; width: 60%;clear: right;">
+				<input type="range" min="1" max="5" value="3" class="slider" id="r9">
+				<p style="float: right; padding-right: 100px;" id="v9"> </p>
+			</div>
+			<script>
+				var slider6 = document.getElementById("r9");
+				var output6 = document.getElementById("v9");
+				output6.innerHTML = "1-2 times a month";
+
+				slider6.oninput = function () {
+					if (this.value == 1) {
+						output6.innerHTML = "Never";
+					}
+					else if (this.value == 2) {
+						output6.innerHTML = "1-2 times a month";
+					}
+					else if (this.value == 3) {
+						output6.innerHTML = "3-4 times a month";
+					}
+					else if (this.value == 4) {
+						output6.innerHTML = "5-6 times a month";
+					}
+					else if (this.value == 5) {
+						output6.innerHTML = "> 7 times a month";
+					}
+				}
+			</script>
+		</div>
 
 		<div class="border border-success"
 			style="border-bottom-width: 1px;margin-bottom: 0px;padding-bottom: 15px;padding-left: 25px;padding-right: 0px;margin-top: 10px;">
 			<div style="width: 100%; clear: both;">
-				<h5 class="font-weight-normal text-body mt-3" style="clear: both; float: left; width: 50%;">7. Do you
+				<h5 class="font-weight-normal text-body mt-3" style="clear: both; float: left; width: 50%;">8. Do you
 					allow pet(s)?</h5>
 				<div class="btn-group btn-group-toggle" data-toggle="buttons" style="clear: right;margin-top: 15px;">
 					<label class="btn btn-outline-success mr-3">
@@ -307,7 +338,7 @@
 		<div class="border border-success"
 			style="border-bottom-width: 1px;margin-bottom: 0px;padding-bottom: 15px;padding-left: 25px;padding-right: 0px;margin-top: 10px;">
 			<div style="width: 100%; clear: both;">
-				<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 50%;">8. Do you smoke?</h5>
+				<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 50%;">9. Do you smoke?</h5>
 				<div class="btn-group btn-group-toggle" data-toggle="buttons" style="clear: right;margin-top: 15px;">
 					<label class="btn btn-outline-success mr-3">
 						<input type="radio" name="smoke" id="smokeY" autocomplete="off">Yes
@@ -319,19 +350,19 @@
 			</div>
 		</div>
 
-
+		
+		
 		<div class="border border-success"
 			style="border-bottom-width: 1px;margin-bottom: 0px;padding-bottom: 15px;padding-left: 25px;padding-right: 0px;margin-top: 10px;">
-			<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 40%; clear: both; ">9. List all
-				allergies
-				you have: </h5>
-			<textarea style="max-width: 750px;margin-top: 15px;" class="form-control" rows="5"
+			<h5 class="font-weight-normal text-body mt-3" style="float: left; width: 40%; clear: both; ">10. List all
+				allergies you have: </h5>
+			<textarea style="margin:auto;max-width: 750px;margin-top: 15px;" class="form-control" rows="5"
 				id="description"></textarea>
 		</div>
 
 		<div class="text-center">
-			<a class="btn btn-dark btn-primary mt-5 mb-5 mr-3" href="profile.html" role="button">Back</a>
-			<a class="btn btn-dark btn-primary mt-5 mb-5 ml-3" href="main.html" role="button">Finish</a>
+			<a class="btn font-weight-bold btn-secondary mt-5 mb-5 mr-3" href="profile.html" role="button">Back</a>
+			<a class="btn font-weight-bold btn-primary mt-5 mb-5 ml-3" href="main.html" role="button">Finish</a>
 			<!--
     <button type="button" name="" id="" class="btn btn-dark btn-primary" btn-lg btn-block">Back</button>
     <button type="button" name="" id="" class="btn btn-dark btn-primary" btn-lg btn-block">Finish</button>
