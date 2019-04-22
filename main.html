@@ -55,14 +55,24 @@
 				function search_post(val) {
 					val = val.toLowerCase();
 					var outer = document.getElementsByClassName("recent_post")[0];
-					var children = outer.children;
+					var all_children = outer.children; //all posts
+					
+					//get only displaying posts
+					var children = []; //all displaying posts
+					for (i = 0; i < all_children.length; i++)
+					{
+						if (all_children[i].classList.contains("hidden") == false)
+						{
+							children.push(all_children[i]);
+						}	
+					}
 
 					for (i = 0; i < children.length; i++) {
 						if (children[i].innerText.toLowerCase().includes(val)) {
 							children[i].style.display = "";
 							//highlight in title
 							var innerText = children[i].children[0].children[0].innerText;
-							var index = innerText.indexOf(val);
+							var index = innerText.toLowerCase().indexOf(val);
 							if (index >= 0) {
 								innerText = innerText.substring(0, index) + "<span style=\"background-color: SkyBlue\">" + innerText.substring(index, index + val.length) + "</span>" + innerText.substring(index + val.length);
 							}
@@ -72,7 +82,7 @@
 							children[i].children[0].children[0].innerHTML = innerText;
 							//highlight in author name
 							innerText = children[i].children[0].children[1].innerText;
-							index = innerText.indexOf(val);
+							index = innerText.toLowerCase().indexOf(val);
 							if (index >= 0) {
 								innerText = innerText.substring(0, index) + "<span style=\"background-color: SkyBlue\">" + innerText.substring(index, index + val.length) + "</span>" + innerText.substring(index + val.length);
 							}
@@ -82,7 +92,7 @@
 							children[i].children[0].children[1].innerHTML = innerText;
 							//highlight in post body
 							innerText = children[i].children[0].children[2].innerText;
-							index = innerText.indexOf(val);
+							index = innerText.toLowerCase().indexOf(val);
 							if (index >= 0) {
 								innerText = innerText.substring(0, index) + "<span style=\"background-color: SkyBlue\">" + innerText.substring(index, index + val.length) + "</span>" + innerText.substring(index + val.length);
 							}
@@ -114,30 +124,30 @@
 				<select id="cleanliness" onchange="filter();"> Cleanliness:
 					<option value="3"> Very important </option>
 					<option value="2"> Preferable </option>
-					<option value="1"> Doesn't matter </option>
+					<option value="1" selected="selected"> Doesn't matter </option>
 				</select>
 				<p style="color:green;display:inline;">Quietness:</p>
 				<select onchange="filter();">
 					<option value="4">Above average</option>
 					<option value="3">Average</option>
 					<option value="2">Below average</option>
-					<option value="1">Doesn't matter</option>
+					<option value="1" selected="selected">Doesn't matter</option>
 				</select>
 				<p style="color:green;display:inline;">Pet Friendliness:</p>
 				<select onchange="filter();">
 					<option value="3">Pet Friendly</option>
 					<option value="2">No pets</option>
-					<option value="1">Doesn't matter</option>
+					<option value="1" selected="selected">Doesn't matter</option>
 				</select>
 				<p style="color:green;display:inline;">Smoking:</p>
 				<select onchange="filter();">
 					<option value="3">No smoking</option>
 					<option value="2">Smoking is okay</option>
-					<option value="1">Doesn't matter</option>
+					<option value="1" selected="selected">Doesn't matter</option>
 				</select>
 			</span>
-			<input class="mt-4" type="checkbox" name="filter_rec_post" value="no" onchange="handle_rec_post(this)" style="display:block;">
-			<p style="color:green;font-weight:bold;clear:both;">Show recommended posts</p>
+			<input class="mt-4" id="rec" type="checkbox" name="filter_rec_post" value="no" onchange="filter()" style="display:block;">
+			<p style="color:green;font-weight:bold;clear:both;">Show recommended posts</p> <!--assume this user's reference is clean1, quiet2, pet1, smoke1-->
 			<a class="btn btn-dark btn-primary mt-2 ml-3" href="" onclick="clear_filter()" role="button">Clear filter</a>
 					
 		</div>
@@ -164,72 +174,82 @@
 		<div class="container-fluid">
 			<div class="row">
 				<script>
-					//assume this user's reference is 1,2,1,1
-					function handle_rec_post(me) {
-						//get currently displayed posts
-						var outer = document.getElementsByClassName("recent_post")[0];
-						var children = outer.children;
-						var displaying = []
-						for (i = 0; i < children.length; i++) {
-							if (children[i].style.display == "") {
-								displaying.push(i);
-							}
-						}
-
-						var count = 0;
-						if (me.checked == true) {
-							displaying.forEach(function (i) {
-								if (children[i].classList.contains("clean" + 1) &&
-									children[i].classList.contains("quiet" + 2) &&
-									children[i].classList.contains("pet" + 1) &&
-									children[i].classList.contains("smoke" + 1)) {
-									count += 1;
-									children[i].style.display = "";
-								}
-								else {
-									children[i].style.display = "none";
-								}
-							})
-							document.getElementById("filter_noti").innerHTML = count + " results found from your personal preference and filter criterias.";
-							
-						}
-						else {
-							displaying.forEach(function (i) {
-								children[i].style.display = "";
-								count += 1;
-							})
-							document.getElementById("filter_noti").innerHTML = count + " results found from your filter criterias.";
-						}
-					}
-
+					
 					function clear_filter() {
 						document.getElementById("filter_noti").innerHTML = "";
 						var outer = document.getElementsByClassName("recent_post")[0];
 						outer.children.style.display = "";
 					}
-
+					
+					//this function is called whenever there is a change in one of the selects or the recommendation checkbox
+					//assume this user's reference is clean1, quiet2, pet1, smoke1
 					function filter() {
+						//get all values of all selects
 						var a = document.getElementsByTagName("select");
-						var current_values = []
+						var current_values = [];
 						for (i = 0; i < a.length; i++) {
 							current_values.push(a[i].value);
-							console.log(a[i].value);
 						}
-
+						
+						//choose selects whose values > 1 => features user wants to fileter by
+						var all_features = ["clean", "quiet", "pet", "smoke"];
+						var filter_features = [];
+						for (i = 0; i < current_values.length; i++) {
+							if (current_values[i] > 1) //add the feature and its value to filter_features
+							{
+								filter_features.push(all_features[i]+current_values[i]);
+							}
+						}
+						//console.log(filter_features);
+						
+						//get all posts
 						var count = 0;
 						var outer = document.getElementsByClassName("recent_post")[0];
-						var children = outer.children;
+						var children = outer.children; //all posts
 
-						for (i = 0; i < children.length; i++) {
-							if (children[i].classList.contains("clean" + current_values[0]) &&
-								children[i].classList.contains("quiet" + current_values[1]) &&
-								children[i].classList.contains("pet" + current_values[2]) &&
-								children[i].classList.contains("smoke" + current_values[3])) {
+						//choose which posts to display via filter selection
+						var children_index_to_remove = [];
+						for (i = 0; i < children.length; i++) //all posts
+						{
+							for (j = 0; j < filter_features.length; j++) //all features want to filter by
+							{
+								if (children[i].classList.contains(filter_features[j]) == false) //if does not satisfy, exclude from children list
+								{
+									children_index_to_remove.push(i);
+								}
+							}
+						}
+						//console.log(children_index_to_remove.length);
+						//check the recommendation checkbox
+						var checkbox = document.getElementById("rec");
+						var rec_list = ["quiet2"];
+						if (checkbox.checked)
+						{
+							for (i = 0; i < children.length; i++) //all posts
+							{
+								for (j = 0; j < rec_list.length; j++) //all features want to filter by
+								{
+									if (children[i].classList.contains(rec_list[j]) == false) //if does not satisfy, exclude from children list
+									{
+										children_index_to_remove.push(i);
+									}
+								}
+							}
+						}
+						children_index_to_remove = [...new Set(children_index_to_remove)];
+						console.log(children_index_to_remove);
+						//hide or display posts
+						for (i = 0; i < children.length; i++) //all posts
+						{
+							if (children_index_to_remove.includes(i) == false) //display 
+							{
 								count += 1;
 								children[i].style.display = "";
+								children[i].classList.remove("hidden");
 							}
 							else {
 								children[i].style.display = "none";
+								children[i].classList.add("hidden"); //so that search feature can find them to not do search on
 							}
 						}
 
@@ -306,17 +326,116 @@
 				<script>
 						// 3, 4, 3, 3
 						//sample posts -clean, quiet, pet, smoke <= look at 10 lines above
+						
+						showContent_recent("Post 9", "Name ", "Description  ..............................................................................", 1, 1, 3, 3);
+						showContent_recent("Post 10", "Name ", "Description  ..............................................................................", 1, 1, 3, 1);
+						showContent_recent("Post 11", "Name ", "Description  ..............................................................................", 1, 2, 1, 2);
+						showContent_recent("Post 12", "Name ", "Description  ..............................................................................", 1, 2, 1, 3);
+						showContent_recent("Post 13", "Name ", "Description  ..............................................................................", 1, 2, 1, 1);
+						showContent_recent("Post 14", "Name ", "Description  ..............................................................................", 1, 2, 2, 2);
+						showContent_recent("Post 15", "Name ", "Description  ..............................................................................", 1, 2, 2, 3);
+						showContent_recent("Post 16", "Name ", "Description  ..............................................................................", 1, 2, 2, 1);
+						showContent_recent("Post 17", "Name ", "Description  ..............................................................................", 1, 2, 3, 2);
+						showContent_recent("Post 18", "Name ", "Description  ..............................................................................", 1, 2, 3, 3);
+						showContent_recent("Post 19", "Name ", "Description  ..............................................................................", 1, 2, 3, 1);
+						showContent_recent("Post 20", "Name ", "Description  ..............................................................................", 1, 3, 1, 2);
+						showContent_recent("Post 21", "Name ", "Description  ..............................................................................", 1, 3, 1, 3);
+						showContent_recent("Post 22", "Name ", "Description  ..............................................................................", 1, 3, 1, 1);
+						showContent_recent("Post 23", "Name ", "Description  ..............................................................................", 1, 3, 2, 2);
+						showContent_recent("Post 24", "Name ", "Description  ..............................................................................", 1, 3, 2, 3);
+						showContent_recent("Post 25", "Name", "Description  ..............................................................................", 1, 3, 2, 1);
+						showContent_recent("Post 26", "Name", "Description  ..............................................................................", 1, 3, 3, 2);
+						showContent_recent("Post 27", "Name", "Description  ..............................................................................", 1, 3, 3, 3);
+						showContent_recent("Post 28", "Name ", "Description  ..............................................................................", 1, 3, 3, 1);
+						showContent_recent("Post 29", "Name ", "Description  ..............................................................................", 1, 4, 1, 2);
+						showContent_recent("Post 30", "Name ", "Description  ..............................................................................", 1, 4, 1, 3);
+						showContent_recent("Post 31", "Name ", "Description  ..............................................................................", 1, 4, 1, 1);
+						showContent_recent("Post 32", "Name", "Description  ..............................................................................", 1, 4, 2, 2);
+						showContent_recent("Post 33", "Name ", "Description  ..............................................................................", 1, 4, 2, 3);
+						showContent_recent("Post 34", "Name ", "Description  ..............................................................................", 1, 4, 2, 1);
+						showContent_recent("Post 35", "Name", "Description  ..............................................................................", 1, 4, 3, 2);
+						showContent_recent("Post 36", "Name ", "Description  ..............................................................................", 1, 4, 3, 3);
+						showContent_recent("Post 37", "Name ", "Description  ..............................................................................", 1, 4, 3, 1);
+						showContent_recent("Post 38", "Name ", "Description  ..............................................................................", 2, 1, 1, 2);
+						showContent_recent("Post 39", "Name ", "Description  ..............................................................................", 2, 1, 1, 3);
+						showContent_recent("Post 40", "Name ", "Description  ..............................................................................", 2, 1, 1, 1);
+						showContent_recent("Post 41", "Name ", "Description  ..............................................................................", 2, 1, 2, 2);
+						showContent_recent("Post 42", "Name ", "Description  ..............................................................................", 2, 1, 2, 3);
+						showContent_recent("Post 43", "Name ", "Description  ..............................................................................", 2, 1, 2, 1);
+						showContent_recent("Post 44", "Name ", "Description  ..............................................................................", 2, 1, 3, 2);
+						showContent_recent("Post 45", "Name ", "Description  ..............................................................................", 2, 1, 3, 3);
+						showContent_recent("Post 46", "Name ", "Description  ..............................................................................", 2, 1, 3, 1);
+						showContent_recent("Post 47", "Name ", "Description  ..............................................................................", 2, 2, 1, 2);
+						showContent_recent("Post 48", "Name ", "Description  ..............................................................................", 2, 2, 1, 3);
+						showContent_recent("Post 48", "Name ", "Description  ..............................................................................", 2, 2, 1, 1);
+						showContent_recent("Post 50", "Name ", "Description  ..............................................................................", 2, 2, 2, 2);
+						showContent_recent("Post 51", "Name ", "Description  ..............................................................................", 2, 2, 2, 3);
+						showContent_recent("Post 52", "Name ", "Description  ..............................................................................", 2, 2, 2, 1);
+						showContent_recent("Post 53", "Name ", "Description  ..............................................................................", 2, 2, 3, 2);
+						showContent_recent("Post 54", "Name ", "Description  ..............................................................................", 2, 2, 3, 3);
+						showContent_recent("Post 55", "Name ", "Description  ..............................................................................", 2, 2, 3, 1);
+						showContent_recent("Post 56", "Name ", "Description  ..............................................................................", 2, 3, 1, 2);
+						showContent_recent("Post 57", "Name ", "Description  ..............................................................................", 2, 3, 1, 3);
+						showContent_recent("Post 58", "Name ", "Description  ..............................................................................", 2, 3, 1, 1);
+						showContent_recent("Post 59", "Name ", "Description  ..............................................................................", 2, 3, 2, 2);
+						showContent_recent("Post 60", "Name ", "Description  ..............................................................................", 2, 3, 2, 3);
+						showContent_recent("Post 61", "Name ", "Description  ..............................................................................", 2, 3, 2, 1);
+						showContent_recent("Post 62", "Name ", "Description  ..............................................................................", 2, 3, 3, 2);
+						showContent_recent("Post 63", "Name ", "Description  ..............................................................................", 2, 3, 3, 3);
+						showContent_recent("Post 64", "Name ", "Description  ..............................................................................", 2, 3, 3, 1);
+						showContent_recent("Post 65", "Name ", "Description  ..............................................................................", 2, 4, 1, 2);
+						showContent_recent("Post 66", "Name ", "Description  ..............................................................................", 2, 4, 1, 3);
+						showContent_recent("Post 67", "Name ", "Description  ..............................................................................", 2, 4, 1, 1);
+						showContent_recent("Post 68", "Name ", "Description  ..............................................................................", 2, 4, 2, 2);
+						showContent_recent("Post 69", "Name ", "Description  ..............................................................................", 2, 4, 2, 3);
+						showContent_recent("Post 70", "Name ", "Description  ..............................................................................", 2, 4, 2, 1);
+						showContent_recent("Post 71", "Name ", "Description  ..............................................................................", 2, 4, 3, 2);
+						showContent_recent("Post 72", "Name ", "Description  ..............................................................................", 2, 4, 3, 3);
+						showContent_recent("Post 73", "Name ", "Description  ..............................................................................", 2, 4, 3, 1);
+						showContent_recent("Post 74", "Name ", "Description  ..............................................................................", 3, 1, 1, 2);
+						showContent_recent("Post 75", "Name ", "Description  ..............................................................................", 3, 1, 1, 3);
+						showContent_recent("Post 76", "Name ", "Description  ..............................................................................", 3, 1, 1, 1);
+						showContent_recent("Post 77", "Name ", "Description  ..............................................................................", 3, 1, 2, 2);
+						showContent_recent("Post 78", "Name ", "Description  ..............................................................................", 3, 1, 2, 3);
+						showContent_recent("Post 79", "Name ", "Description  ..............................................................................", 3, 1, 2, 1);
+						showContent_recent("Post 80", "Name ", "Description  ..............................................................................", 3, 1, 3, 2);
+						showContent_recent("Post 81", "Name ", "Description  ..............................................................................", 3, 1, 3, 3);
+						showContent_recent("Post 82", "Name ", "Description  ..............................................................................", 3, 1, 3, 1);
+						showContent_recent("Post 83", "Name ", "Description  ..............................................................................", 3, 2, 1, 2);
+						showContent_recent("Post 84", "Name ", "Description  ..............................................................................", 3, 2, 1, 3);
+						showContent_recent("Post 85", "Name ", "Description  ..............................................................................", 3, 2, 1, 1);
+						showContent_recent("Post 86", "Name ", "Description  ..............................................................................", 3, 2, 2, 2);
+						showContent_recent("Post 87", "Name ", "Description  ..............................................................................", 3, 2, 2, 3);
+						showContent_recent("Post 88", "Name ", "Description  ..............................................................................", 3, 2, 2, 1);
+						showContent_recent("Post 89", "Name ", "Description  ..............................................................................", 3, 2, 3, 2);
+						showContent_recent("Post 90", "Name ", "Description  ..............................................................................", 3, 2, 3, 3);
+						showContent_recent("Post 91", "Name ", "Description  ..............................................................................", 3, 2, 3, 1);
+						showContent_recent("Post 92", "Name ", "Description  ..............................................................................", 3, 3, 1, 2);
+						showContent_recent("Post 93", "Name ", "Description  ..............................................................................", 3, 3, 1, 3);
+						showContent_recent("Post 94", "Name ", "Description  ..............................................................................", 3, 3, 1, 1);
+						showContent_recent("Post 95", "Name ", "Description  ..............................................................................", 3, 3, 2, 2);
+						showContent_recent("Post 96", "Name ", "Description  ..............................................................................", 3, 3, 2, 3);
+						showContent_recent("Post 97", "Name ", "Description  ..............................................................................", 3, 3, 2, 1);
+						showContent_recent("Post 98", "Name ", "Description  ..............................................................................", 3, 3, 3, 2);
+						showContent_recent("Post 99", "Name ", "Description  ..............................................................................", 3, 3, 3, 3);
+						showContent_recent("Post 100", "Name ", "Description ..............................................................................", 3, 3, 3, 1);
+						showContent_recent("Post 101", "Name ", "Description  ..............................................................................", 3, 4, 1, 2);
+						showContent_recent("Post 102", "Name ", "Description  ..............................................................................", 3, 4, 1, 3);
+						showContent_recent("Post 103", "Name ", "Description  ..............................................................................", 3, 4, 1, 1);
+						showContent_recent("Post 104", "Name ", "Description  ..............................................................................", 3, 4, 2, 2);
+						showContent_recent("Post 105", "Name ", "Description  ..............................................................................", 3, 4, 2, 3);
+						showContent_recent("Post 106", "Name ", "Description  ..............................................................................", 3, 4, 2, 1);
+						showContent_recent("Post 107", "Name ", "Description  ..............................................................................", 3, 4, 3, 2);
 						showContent_recent("Looking for summer roommate", "John D", 
 						"Fully furnished, walk-up apartment in older home. Bring clothes and computer, and move in. ", 1, 1, 1, 1);
-						showContent_recent("McEachern dorm - looking for male roommate", "Jeff H", "Please be tidy and respectful, msg me for details.", 2, 2, 2, 2);
-						showContent_recent("$582 / 2br - 660ft2", "Kimmy H", "Need a roommate for fall semester. Rent includes water, sewer, and garbage. ", 3, 3, 3, 3);
-						showContent_recent("Pioneer Hill Quiet Private Apartment", "Josh D", "Looking for fall semester roommate. Available August 10th for year lease. ", 1, 4, 2, 3);
-						showContent_recent(" $625 / 2br - 2 bed, 1 bath, W&D available June 1 ", "Kelsey G", "Must be female, please send message", 3, 2, 1, 1);
-						showContent_recent("Carol's Cozy Living", "Carol A", "Need roommate for my apartment. Near school, good wifi. Contact for more info.", 2, 1, 2, 1);
-						showContent_recent("Lower unit 2 bedroom house", "Jason N", "2 bedroom 1 bath & W/D, lower unit of house on Dillon Street. You pay $845/month as well as electrical and gas. ", 1, 4, 3, 2);
-						showContent_recent("Nez Pierce apts -- looking for 2 roommates", "Dan B", "305 Grand ave. looking for 2 good roommates for fall semester", 1, 3, 2, 1);
-						showContent_recent("Nez Pierce apts -- looking for 2 roommates", "Dan B", "305 Grand ave. looking for 2 good roommates for fall semester", 3, 3, 2, 2);
-				</script>
+						showContent_recent("McEachern dorm - looking for male roommate", "Jeff H", "Please be tidy and respectful, msg me for details.", 1, 1, 1, 2);
+						showContent_recent("$582 / 2br - 660ft2", "Kimmy H", "Need a roommate for fall semester. Rent includes water, sewer, and garbage. ", 1, 1, 1, 3);
+						showContent_recent("Pioneer Hill Quiet Private Apartment", "Josh D", "Looking for fall semester roommate. Available August 10th for year lease. ", 1, 1, 2, 1);
+						showContent_recent(" $625 / 2br - 2 bed, 1 bath, W&D available June 1 ", "Kelsey G", "Must be female, please send message", 1, 1, 2, 2);
+						showContent_recent("Lower unit 2 bedroom house", "Jason N", "2 bedroom 1 bath & W/D, lower unit of house on Dillon Street. You pay $845/month as well as electrical and gas. ", 1, 4, 3, 1);
+						showContent_recent("Carol's Cozy Living", "Carol A", "Need roommate for my apartment. Near school, good wifi. Contact for more info.", 1, 1, 2, 3);
+						showContent_recent("Nez Pierce apts -- looking for 2 roommates", "Dan B", "305 Grand ave. looking for 2 good roommates for fall semester", 1, 1, 3, 2);
+					</script
 
 
 			</div>
